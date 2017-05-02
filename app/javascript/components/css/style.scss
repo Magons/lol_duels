@@ -1,0 +1,13 @@
+body {
+  width: 100%;
+  font-family: 'Alice', serif;
+}
+
+@import "./css/mixins.scss";
+@import "./css/blocks/header.scss";
+@import "./css/blocks/main.scss";
+@import "./css/blocks/footer.scss";
+@import "./css/blocks/modal-champion.scss";
+@import "./css/blocks/modal-talants.scss";
+@import "./css/blocks/talant.scss";
+@import "./css/blocks/modal-runs.scss";

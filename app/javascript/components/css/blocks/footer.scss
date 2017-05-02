@@ -1,0 +1,31 @@
+.footer {
+	height: 222px;
+	border-bottom: 5px solid #b58f50;
+	background-color: #000000;	
+}
+
+.footer__container {
+	@include container();
+	padding-top: 32px;
+	font-size: 0;
+}
+
+.footer__logo {
+	display: inline-block;
+	vertical-align: top;
+	width: 310px;
+	height: 123px;
+	margin-left: 433px;
+	margin-right: 120px;
+}
+
+.footer__copyrights {
+	width: 195px;
+	height: 25px;
+	margin: 0 auto;
+	margin-top: 27px;
+	text-align: center;
+	font-family: 'Alice', serif;
+	font-size: 16px;
+	color: #ffffff;
+}

@@ -1,0 +1,15 @@
+.main {
+	max-width: 1920px;
+	min-height: 1229px;
+	background: url(./img/main-bg.jpg) top center no-repeat;
+	border-bottom: 5px solid #b58f50;
+}
+
+.main__container {
+	@include container();
+	font-size: 0;
+}
+
+@import "./css/blocks/sidebar.scss";
+@import "./css/blocks/center.scss";
+

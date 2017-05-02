@@ -1,0 +1,102 @@
+.modal-champion {
+	display: block;
+	position: absolute;
+	z-index: 2;
+	top: 480px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+  width: 992px;
+  height: 875px;
+  background: url(./img/modal-champion-bg.png) center top no-repeat;
+  background-color: transparent;
+}
+
+.moodal-champion__header {
+	font-family: 'Alice', serif;
+	text-align: center;
+	font-size: 36px;
+	font-weight: 400;
+	color: #ffffff;
+	margin-top: 53px;
+	margin-bottom: 41px;
+}
+
+.modal-champion__search {
+	position: relative;
+	width: 781px;
+	margin: 0 auto;
+	margin-bottom: 45px;
+
+	&::after {
+    @include pseudoelement();
+    top: 8px;
+    right: 17px;
+    width: 21px;
+    height: 21px;
+    background: url(./img/search.png) center top no-repeat;
+	}
+}
+
+.modal-campion__input {
+	width: 712px;
+	height: 12px;
+	border-radius: 11px;
+	padding: 12px 24px;
+	padding-right: 44px;
+	font-family: 'Alice', serif;
+	font-size: 18px;
+	color: #444444;
+	border: none;
+	outline: none;
+}
+
+.modal-champion__item-list {
+	margin: 0;
+	margin-left: 104px;
+	padding: 0;
+	width: 850px;
+	height: 590px;
+	font-size: 0;
+	overflow: auto;
+}
+
+.modal-champion__item {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 120px;
+	height: 120px;
+  border: 3px solid #ddd0a9;
+  border-radius: 13px;
+  margin-right: 38px;
+  margin-bottom: 28px;
+  background: url(./img/champion-icon.png) center top no-repeat;
+  cursor: pointer;
+}
+
+.modal-champion__hero-name {
+	position: absolute;
+	bottom: 2px;
+	width: 120px;
+	height: 20px;
+	margin: 0;
+	padding-top: 4px;
+	font-size: 16px;
+	font-weight: 400px;
+	text-align: center;
+	font-family: 'Alice', serif;
+	color: #ffffff;
+	background-color: rgba(49, 32, 49, 0.7);
+	border-radius: 8px;
+}
+
+
+
+
+
+
+
+
+
+

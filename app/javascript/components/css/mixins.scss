@@ -1,0 +1,71 @@
+
+@mixin container() {
+	width: 1170px;
+	margin: 0 auto;
+}
+
+@mixin pseudoelement() {
+  position: absolute;
+  content: "";
+}
+
+@mixin btn-reset() {
+	padding: 0;
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	outline: none;
+	cursor: pointer;
+}
+
+@mixin orange-rune() {
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 68px;
+  height: 72px;
+  background: url(./img/orange-rune.png) center top no-repeat;
+  background-color: transparent;
+}
+
+@mixin red-rune() {
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 68px;
+  height: 72px;
+  background: url(./img/red-rune.png) center top no-repeat;
+  background-color: transparent;
+}
+
+@mixin blue-rune() {
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 68px;
+  height: 72px;
+  background: url(./img/blue-rune.png) center top no-repeat;
+  background-color: transparent;
+}
+
+@mixin violet-rune() {
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 130px;
+  height: 141px;
+  background: url(./img/violet-rune.png) center top no-repeat;
+  background-color: transparent;
+}
