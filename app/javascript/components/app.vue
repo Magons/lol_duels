@@ -18,85 +18,9 @@
           <button class="sidebar__choose-btn" type="button" @click="showChampions = !showChampions">Выбор чемпиона</button>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hp":</p>
-              <p class="sidebar__param-val">537.8</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpperlevel":</p>
-              <p class="sidebar__param-val">85.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mp":</p>
-              <p class="sidebar__param-val">105.6</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpperlevel":</p>
-              <p class="sidebar__param-val">45.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"movespeed":</p>
-              <p class="sidebar__param-val">345.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"armor":</p>
-              <p class="sidebar__param-val">24.384</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"armorperlevel":</p>
-              <p class="sidebar__param-val">3.8</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"spellblock":</p>
-              <p class="sidebar__param-val">32.1</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"spellblockperlevel":</p>
-              <p class="sidebar__param-val">1.25</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackrange":</p>
-              <p class="sidebar__param-val">150.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpregen":</p>
-              <p class="sidebar__param-val">6.59</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpregenperlevel":</p>
-              <p class="sidebar__param-val">0.5</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpregen":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpregenperlevel":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"crit":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"critperlevel":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackdamage":</p>
-              <p class="sidebar__param-val">60.376</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackdamageperlevel":</p>
-              <p class="sidebar__param-val">3.2</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackspeedoffset":</p>
-              <p class="sidebar__param-val">-0.04</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackspeedperlevel":</p>
-              <p class="sidebar__param-val">3.0</p>
+            <li class="sidebar__parameter" v-for="(value, key) in leftChampion.stats">
+              <p class="sidebar__param-title">{{key}}:</p>
+              <p class="sidebar__param-val">{{value}}</p>
             </li>
           </ul>
 
@@ -129,7 +53,8 @@
           <div class="center__heroes">
             <div class="center__hero  center__hero--left">
               <div class="center__hero-pic">
-                <p class="center__hero-name">Vi the Piltover enforcer</p>
+                <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${leftChampion.id}_0.jpg`" height="100%"/>
+                <p class="center__hero-name">{{leftChampion.name}}</p>
               </div>
               <ul class="center__hero-items">
                 <li class="center__hero-item"></li>
@@ -143,7 +68,8 @@
             <div class="center__vs">VS</div>
             <div class="center__hero  center__hero--right">
               <div class="center__hero-pic">
-                <p class="center__hero-name">Vi the Piltover enforcer</p>
+                <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${rightChampion.id}_0.jpg`" height="100%"/>
+                <p class="center__hero-name">{{rightChampion.name}}</p>
               </div>
               <ul class="center__hero-items">
                 <li class="center__hero-item"></li>
@@ -161,85 +87,9 @@
           <button class="sidebar__choose-btn" type="button">Выбор чемпиона</button>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hp":</p>
-              <p class="sidebar__param-val">537.8</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpperlevel":</p>
-              <p class="sidebar__param-val">85.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mp":</p>
-              <p class="sidebar__param-val">105.6</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpperlevel":</p>
-              <p class="sidebar__param-val">45.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"movespeed":</p>
-              <p class="sidebar__param-val">345.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"armor":</p>
-              <p class="sidebar__param-val">24.384</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"armorperlevel":</p>
-              <p class="sidebar__param-val">3.8</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"spellblock":</p>
-              <p class="sidebar__param-val">32.1</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"spellblockperlevel":</p>
-              <p class="sidebar__param-val">1.25</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackrange":</p>
-              <p class="sidebar__param-val">150.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpregen":</p>
-              <p class="sidebar__param-val">6.59</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"hpregenperlevel":</p>
-              <p class="sidebar__param-val">0.5</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpregen":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"mpregenperlevel":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"crit":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"critperlevel":</p>
-              <p class="sidebar__param-val">0.0</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackdamage":</p>
-              <p class="sidebar__param-val">60.376</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackdamageperlevel":</p>
-              <p class="sidebar__param-val">3.2</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackspeedoffset":</p>
-              <p class="sidebar__param-val">-0.04</p>
-            </li>
-            <li class="sidebar__parameter">
-              <p class="sidebar__param-title">"attackspeedperlevel":</p>
-              <p class="sidebar__param-val">3.0</p>
+            <li class="sidebar__parameter" v-for="(value, key) in rightChampion.stats">
+              <p class="sidebar__param-title">{{key}}:</p>
+              <p class="sidebar__param-val">{{value}}</p>
             </li>
           </ul>
 
@@ -283,6 +133,7 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import talants from './talants'
   import runes from './runes'
   import champions from './champions'
@@ -295,6 +146,12 @@
         showShop: false,
         showChampions: false
       }
+    },
+    computed: {
+      ...mapGetters([
+        'leftChampion',
+        'rightChampion'
+      ]),
     },
     components: {
       talants,
