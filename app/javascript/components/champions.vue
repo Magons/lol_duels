@@ -1,104 +1,43 @@
 <template>
   <div class="modal-champion" v-if="show">
     <h1 class="moodal-champion__header">Выбор чемпиона</h1>
+    <button @click="close()">Close</button>
     <div class="modal-champion__search">
       <input type="text" class="modal-campion__input" placeholder="Имя чемпиона">
     </div>
     <ul class="modal-champion__item-list">
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
-      </li>
-      <li class="modal-champion__item">
-        <p class="modal-champion__hero-name">Aatrox</p>
+      <li class="modal-champion__item" v-for="(champion, name) in champions">
+        <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${champion.image.full}`"/>
+        <p class="modal-champion__hero-name">{{name}}</p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
     props: ['show'],
-    data: function () {
+    created () {
+      this.getChampions()
+    },
+    data () {
       return {
 
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'champions'
+      ])
+    },
+    methods: {
+      ...mapActions([
+        'getChampions'
+      ]),
+      close () {
+        this.$emit('close')
       }
     }
   }

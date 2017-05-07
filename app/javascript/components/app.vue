@@ -14,7 +14,6 @@
 
     <main class="main">
       <div class="main__container">
-
         <div class="sidebar  sidebar--left">
           <button class="sidebar__choose-btn" type="button" @click="showChampions = !showChampions">Выбор чемпиона</button>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
@@ -265,7 +264,7 @@
     </main>
 
     <footer class="footer">
-        <div class="footer__container">
+      <div class="footer__container">
         <div class="footer__logo">
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
         </div>
@@ -273,11 +272,11 @@
       </div>
     </footer>
 
-    <champions :show="showChampions"></champions>
+    <champions :show="showChampions" @close="showChampions = false"></champions>
 
-    <talants :show="showTalants"></talants>
+    <talants :show="showTalants" @close="showTalants = false"></talants>
 
-    <runes :show="showRunes"></runes>
+    <runes :show="showRunes" @close="showRunes = false"></runes>
 
     </div>
   </div>
