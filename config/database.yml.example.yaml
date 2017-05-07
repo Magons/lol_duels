@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: lol_duels_development
+
+test:
+  <<: *default
+  database: lol_duels_test
+
+production:
+  <<: *default
+  database: lol_duels_production
+  username: lol_duels
+  password: <%= ENV['LOL_DUELS_DATABASE_PASSWORD'] %>

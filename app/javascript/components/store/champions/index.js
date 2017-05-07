@@ -14,7 +14,7 @@ const mutations = {
 
 const actions = {
   getChampions (context) {
-    axios.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
+    axios.get('https://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
       .then((response) => {
         context.commit('setChampions', { value: response.data.data })
       })
