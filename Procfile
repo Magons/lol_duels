@@ -1,2 +1,2 @@
-backend: bin/rails s -p 3000
+backend: bin/rails s 
 frontend: bin/webpack-dev-server
