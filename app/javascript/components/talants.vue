@@ -1,5 +1,6 @@
 <template>
   <div class="modal-talants  modal-talants--active" v-if="show">
+    <button class="close-btn" @click="close()">Close</button>
     <h1 class="modal-talants__header">Таланты</h1>
     <div class="modal-talants__wrap">
       <div class="modal-talants__user">tankop</div>

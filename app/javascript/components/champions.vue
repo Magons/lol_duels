@@ -1,7 +1,7 @@
 <template>
   <div class="modal-champion" v-if="show">
-    <h1 class="moodal-champion__header">Выбор чемпиона</h1>
-    <button @click="close()">Close</button>
+    <button class="close-btn" @click="close()">Close</button>
+    <h1 class="moodal-champion__header">Выбор чемпиона</h1>    
     <div class="modal-champion__search">
       <input type="text" class="modal-campion__input" placeholder="Имя чемпиона" v-model="name">
     </div>
