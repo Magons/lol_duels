@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+  <div class="container" v-if="show">
     <button class="container-close" type="button" title="Закрыть"></button>
     <button class="recommended-btn" type="button">Рекомендованные</button>
     <button class="all-items-btn" type="button">Все предметы</button>
@@ -44,7 +44,7 @@
                   <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
                 </div>
               </div>
-            </div>  
+            </div>
             <div class="row-3">
             <p>Начальные предметы</p>
               <div class="icon-3">
@@ -77,7 +77,7 @@
                   <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
                 </div>
               </div>
-            </div>  
+            </div>
             <div class="row-3">
             <p>Начальные предметы</p>
               <div class="icon-3">
@@ -110,7 +110,7 @@
                   <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
                 </div>
               </div>
-            </div>            
+            </div>
           </div>
           <div class="wrap-all-items">
             <div class="block-1">
@@ -510,7 +510,7 @@
                       0
                     </div>
                   </div>
-                </div>  
+                </div>
               </div>
               <div class="block-2-2">
                 <div class="icon-2">
@@ -704,7 +704,7 @@
       </div>
       <div class="content-right">
         <div class="gallery">
-          <p>Схемы развития:</p> 
+          <p>Схемы развития:</p>
           <button class="prev"></button>
           <div class="content">
             <div class="pic">
@@ -769,10 +769,10 @@
             </div>
             <div class="name">Боевой молот Колфилда</div>
             <div class="price">1100</div>
-            <button class="buy-btn">КУПИТЬ</button>           
+            <button class="buy-btn">КУПИТЬ</button>
           </div>
           <div class="discription">
-            
+
           </div>
         </div>
       </div>
@@ -781,7 +781,45 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
 
+  export default {
+    props: ['show'],
+    created () {
+      // this.getChampions()
+    },
+    data () {
+      return {
+
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'champions',
+        'searchString'
+      ]),
+      name: {
+        get () {
+          return this.searchString
+        },
+        set (value) {
+          this.$store.commit('setSearchString', { value })
+        }
+      }
+    },
+    methods: {
+      ...mapActions([
+        'getChampions'
+      ]),
+      setLeftChampion (champion) {
+        this.$store.commit('setLeftChampion', { value: champion })
+        this.close()
+      },
+      close () {
+        this.$emit('close')
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

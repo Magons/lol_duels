@@ -93,7 +93,7 @@
             </li>
           </ul>
 
-           <button class="sidebar__yellow-btn" type="button" @click="showShop = !showShop">Магазин</button>
+           <button class="sidebar__yellow-btn" type="button" @click="showItemStore = !showItemStore">Магазин</button>
            <button class="sidebar__yellow-btn" type="button" @click="showRunes = !showRunes">Руны</button>
            <button class="sidebar__yellow-btn" type="button" @click="showTalants = !showTalants">Таланты</button>
 
@@ -128,7 +128,7 @@
 
     <runes :show="showRunes" @close="showRunes = false"></runes>
 
-    </div>
+    <itemStore :show="showItemStore" @close="showItemStore = false"></itemStore>
   </div>
 </template>
 
@@ -137,13 +137,14 @@
   import talants from './talants'
   import runes from './runes'
   import champions from './champions'
+  import itemStore from './item_store'
 
   export default {
     data: function () {
       return {
         showRunes: false,
         showTalants: false,
-        showShop: false,
+        showItemStore: false,
         showChampions: false
       }
     },
@@ -156,7 +157,8 @@
     components: {
       talants,
       runes,
-      champions
+      champions,
+      itemStore
     }
   }
 </script>
