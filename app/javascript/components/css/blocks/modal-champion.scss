@@ -73,6 +73,11 @@
   margin-bottom: 28px;
   background: url(./img/champion-icon.png) center top no-repeat;
   cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    border-color: #c8a35b;
+  }
 }
 
 .modal-champion__hero-name {

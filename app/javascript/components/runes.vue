@@ -1,5 +1,6 @@
 <template>
   <div class="modal-runs" v-if="show">
+    <button class="close-btn" @click="close()">Close</button>
     <h1 class="modal-runs__header">Руны</h1>
     <div class="modal-runs__wrap">
       <div class="modal-runs__user">tankop</div>

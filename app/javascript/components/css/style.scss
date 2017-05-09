@@ -1,9 +1,16 @@
+html {
+  padding: 0;
+  margin: 0;
+}
 body {
+  margin: 0;
+  padding: 0;
   width: 100%;
   font-family: 'Alice', serif;
 }
 
 @import "./css/mixins.scss";
+@import "./css/blocks/close-btn.scss";
 @import "./css/blocks/header.scss";
 @import "./css/blocks/main.scss";
 @import "./css/blocks/footer.scss";
@@ -11,3 +18,4 @@ body {
 @import "./css/blocks/modal-talants.scss";
 @import "./css/blocks/talant.scss";
 @import "./css/blocks/modal-runs.scss";
+@import "./css/blocks/store.scss";

@@ -73,11 +73,21 @@
 .center__hero {
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
 	width: 210px;
+
+  &::after {
+  	@include pseudoelement();
+  	bottom: 129px;
+  	left: 15px;
+	  width: 179px;
+  	height: 40px;
+  	background: url(./img/name-ornament.png) center top no-repeat;
+  	z-index: 1;
+  }
 }
 
-.center__hero-pic {
-	position: relative;
+.center__hero-pic {	
 	width: 204px;
 	height: 371px;
 	margin-bottom: 63px;
@@ -87,23 +97,16 @@
 	-webkit-box-shadow: inset 2px 2px 41px 10px rgba(0,0,0,0.75);
   -moz-box-shadow: inset 2px 2px 41px 10px rgba(0,0,0,0.75);
    box-shadow: inset 2px 2px 41px 10px rgba(0,0,0,0.75);
+   overflow: hidden;
    z-index: 1;
 
-    &::after {
-	  	@include pseudoelement();
-	  	bottom: -40px;
-	  	left: 12px;
-	  	width: 179px;
-	  	height: 40px;
-	  	background: url(./img/name-ornament.png) center top no-repeat;
-	  	z-index: 2;
-	  }
+
 }
 
 .center__hero-name {
 	position: absolute;
-	bottom: -38px;
-	left: 9px;
+	bottom: 131px;
+	left: 12px;
 	width: 187px;
 	height: 23px;
 	padding-top: 6px;
@@ -113,7 +116,7 @@
 	color: #ffffff;
 	border-radius: 8px;
 	background: linear-gradient(to bottom, #fbdc79, #9f7944);
-	z-index: 3;
+	z-index: 2;
 }
 
 .center__hero-items {
