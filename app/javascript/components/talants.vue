@@ -127,6 +127,11 @@
       return {
 
       }
+    },
+    methods: {
+      close () {
+        this.$emit('close')
+      }
     }
   }
 </script>
