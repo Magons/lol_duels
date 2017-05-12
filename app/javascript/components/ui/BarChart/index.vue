@@ -38,7 +38,7 @@
         new TWEEN.Tween({ tweeningValue: startValue })
           .to({ tweeningValue: endValue }, 500)
           .onUpdate(function () {
-            vm.tweeningValue = this.tweeningValue.toFixed(vm.roundNumber)
+            vm.tweeningValue = this.tweeningValue
           })
           .onComplete(function () {
             cancelAnimationFrame(animationFrame)
