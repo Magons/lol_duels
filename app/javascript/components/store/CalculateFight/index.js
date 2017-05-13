@@ -15,14 +15,21 @@ const mutations = {
     state.chanceRight = payload.value
     state.chanceLeft = 100 - payload.value
   },
+  setChanceLeft (state, payload) {
+    state.chanceLeft = payload.value
+    state.chanceRight = 100 - payload.value
+  },
 }
 
 const actions = {
   claculate (context) {
-    debugger
-    const hpLeft = context.rootGetters.leftChampion.stats.hp
-    const hpRight = context.rootGetters.rightChampion.stats.hp
-    context.commit('setChanceRight', { value: (hpLeft * 100) / hpRight })
+    axios.post('/fight/calculate', {
+      left: context.rootGetters.leftChampion,
+      right: context.rootGetters.rightChampion
+    })
+      .then((response) => {
+        context.commit('setChanceLeft', { value: response.data })
+      })
   }
 }
 
