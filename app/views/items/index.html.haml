@@ -1,0 +1,8 @@
+%h1 Items
+- @items.each do |item|
+  %p= item.name
+  / %pre= item.data
+  - item.data.each do |key, value|
+    %p
+      %b= key + ': '
+      %span= value

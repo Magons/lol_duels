@@ -1,0 +1,8 @@
+%h1 Masteries
+- @masteries.each do |mastery|
+  %p= mastery.name
+  / %pre= mastery.data
+  - mastery.data.each do |key, value|
+    %p
+      %b= key + ': '
+      %span= value

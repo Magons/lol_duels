@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const state = {
-  chanceLeft: 80,
-  chanceRight: 20
+  chanceLeft: 50,
+  chanceRight: 50
 }
 
 const getters = {

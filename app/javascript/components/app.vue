@@ -18,6 +18,10 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Left')">
             Выбор чемпиона
           </button>
+          <select>
+            <option>Choose level</option>
+            <option v-for="level in levels">{{level}}</option>
+          </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
             <li class="sidebar__parameter" v-for="(value, key) in leftChampion.stats">
@@ -93,6 +97,10 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Right')">
             Выбор чемпиона
           </button>
+          <select>
+            <option>Choose level</option>
+            <option v-for="level in levels">{{level}}</option>
+          </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
             <li class="sidebar__parameter" v-for="(value, key) in rightChampion.stats">
@@ -158,7 +166,8 @@
         showTalants: false,
         showItemStore: false,
         showChampions: false,
-        side: 'Left'
+        side: 'Left',
+        levels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
       }
     },
     computed: {

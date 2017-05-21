@@ -1,0 +1,8 @@
+%h1 Runes
+- @runes.each do |rune|
+  %p= rune.name
+  / %pre= rune.data
+  - rune.data.each do |key, value|
+    %p
+      %b= key + ': '
+      %span= value

@@ -1,0 +1,9 @@
+%h1 Champions
+- @champions.each do |champion|
+  %p= champion.name
+  / %pre= champion.data
+  - champion.data.each do |key, value|
+    %p
+      %b= key + ': '
+      %span= value
+
