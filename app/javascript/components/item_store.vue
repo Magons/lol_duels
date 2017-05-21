@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-if="show">
-    <button class="container-close" type="button" title="Закрыть"></button>
+    <button class="container-close" type="button" title="Закрыть" @click="$emit('close')"></button>
     <button class="recommended-btn" type="button">Рекомендованные</button>
     <button class="all-items-btn" type="button">Все предметы</button>
     <div class="content">
