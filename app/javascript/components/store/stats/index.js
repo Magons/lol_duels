@@ -1,100 +1,114 @@
 import axios from 'axios'
 
 const state = {
-  leftStats: {
+  stats: {
     abilityPower: {
       name: 'Ability power',
-      value: 0
+      left: 0,
+      right: 0
     },
     armor: {
       name: 'Armor',
-      value: 0
+      left: 0,
+      right: 0
     },
     armorPenetration: {
       name: 'Armor penetration',
-      value: 0
+      left: 0,
+      right: 0
     },
     attackDamage: {
       name: 'Attack damage',
-      value: 0
+      left: 0,
+      right: 0
     },
     cooldownReduction: {
       name: 'Cooldown reduction',
-      value: 0
+      left: 0,
+      right: 0
     },
     criticalStrikeChance: {
       name: 'Critical strike chance',
-      value: 0
+      left: 0,
+      right: 0
     },
     criticalStrikeDamage: {
       name: 'Critical strike damage',
-      value: 0
+      left: 0,
+      right: 0
     },
     damageAmplification: {
       name: 'Damage amplification',
-      value: 0
+      left: 0,
+      right: 0
     },
     health: {
       name: 'Health',
-      value: 0
+      left: 0,
+      right: 0
     },
     healthRegeneration: {
       name: 'Health regeneration',
-      value: 0
+      left: 0,
+      right: 0
     },
     lifeSteal: {
       name: 'Life steal',
-      value: 0
+      left: 0,
+      right: 0
     },
     magicPenetration: {
       name: 'Magic penetration',
-      value: 0
+      left: 0,
+      right: 0
     },
     magicResistance: {
       name: 'Magic resistance',
-      value: 0
+      left: 0,
+      right: 0
     },
     magicResistanceReduction: {
       name: 'Magic resistance reduction',
-      value: 0
+      left: 0,
+      right: 0
     },
     mana: {
       name: 'Mana',
-      value: 0
+      left: 0,
+      right: 0
     },
     manaRegeneration: {
-      name: 'Mana regeneration'
+      name: 'Mana regeneration',
+      left: 0,
+      right: 0
     },
     spellVamp: {
       name: 'Spell vamp',
-      value: 0
+      left: 0,
+      right: 0
     },
     movenmentSpeed: {
       name: 'Movenment speed',
-      value: 0
+      left: 0,
+      right: 0
     }
-  },
-  rightStats: {
-
   }
 }
 
 const getters = {
-  searchString: state => state.searchString,
-  champions () {
-    return Object.values(state.champions).filter(item =>
-      item.name.toLowerCase().match(state.searchString.trim().toLowerCase())
-    )
-  },
-  leftChampion: state => state.leftChampion,
-  rightChampion: state => state.rightChampion
+  stats: state => state.stats
 }
 
 const mutations = {
-  setChampions (state, payload) { state.champions = payload.value },
-  setSearchString (state, payload) { state.searchString = payload.value },
-  setLeftChampion (state, payload) { state.leftChampion = payload.value },
-  setRightChampion (state, payload) { state.rightChampion = payload.value }
+  setHelth (state, payload) {
+    if (payload.level === 1) {
+      state.stats.health[payload.side] = payload.stats.hp
+    } else {
+      const additionalHelth = payload.stats.hpperlevel * payload.level - payload.stats.hpperlevel
+      state.stats.health[payload.side] = payload.stats.hp + additionalHelth
+    }
+
+  }
 }
 
 const actions = {
@@ -103,6 +117,12 @@ const actions = {
       .then((response) => {
         context.commit('setChampions', { value: response.data.data })
       })
+  },
+  calculateStats (context, payload) {
+    const side = payload.side.toLowerCase()
+    const stats = context.rootGetters[`${side}Champion`].stats
+    const level = context.rootGetters[`${side}Level`]
+    context.commit('setHelth', { side, stats, level })
   }
 }
 

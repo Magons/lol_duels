@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 
 import Сhampions from './champions'
 import CalculateFight from './CalculateFight'
+import Stats from './stats'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     Сhampions,
-    CalculateFight
+    CalculateFight,
+    Stats
   }
 })

@@ -3,6 +3,7 @@ import axios from 'axios'
 const state = {
   champions: [],
   searchString: '',
+  leftLevel: 10,
   leftChampion: {
     version: '6.24.1',
     id: 'Aatrox',
@@ -50,6 +51,7 @@ const state = {
       attackspeedperlevel: 3.0
     }
   },
+  rightLevel: 1,
   rightChampion: {
     version: '6.24.1',
     id: 'Aatrox',
@@ -107,14 +109,26 @@ const getters = {
     )
   },
   leftChampion: state => state.leftChampion,
-  rightChampion: state => state.rightChampion
+  rightChampion: state => state.rightChampion,
+  leftLevel: state => state.leftLevel,
+  rightLevel: state => state.rightLevel
 }
 
 const mutations = {
   setChampions (state, payload) { state.champions = payload.value },
   setSearchString (state, payload) { state.searchString = payload.value },
-  setLeftChampion (state, payload) { state.leftChampion = payload.value },
-  setRightChampion (state, payload) { state.rightChampion = payload.value }
+  setLeftChampion (state, payload) {
+    state.leftChampion = payload.value
+  },
+  setRightChampion (state, payload) {
+    state.rightChampion = payload.value
+  },
+  setLeftLevel (state, payload) {
+    state.leftLevel = payload.value
+  },
+  setRightLevel (state, payload) {
+    state.rightLevel = payload.value
+  }
 }
 
 const actions = {

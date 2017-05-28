@@ -49,6 +49,7 @@
       ]),
       setChampion (champion) {
         this.$store.commit(`set${this.side}Champion`, { value: champion })
+        this.$store.dispatch('calculateStats', { side: this.side })
         this.claculate()
         this.close()
       },

@@ -18,16 +18,15 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Left')">
             Выбор чемпиона
           </button>
-          <select>
-            <option>Choose level</option>
-            <option v-for="level in levels">{{level}}</option>
+          <select v-model="leftLvl">
+            <option v-for="level in levels" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter" v-for="(value, key) in leftChampion.stats">
-              <p class="sidebar__param-title">{{key}}:</p>
+            <li class="sidebar__parameter" v-for="stat in stats">
+              <p class="sidebar__param-title">{{stat.name}}:</p>
               <p class="sidebar__param-val">
-                <AnimatedNumber :value="value" :roundNumber="2"/>
+                <AnimatedNumber :value="stat.left" :roundNumber="2"/>
               </p>
             </li>
           </ul>
@@ -97,16 +96,15 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Right')">
             Выбор чемпиона
           </button>
-          <select>
-            <option>Choose level</option>
-            <option v-for="level in levels">{{level}}</option>
+          <select v-model="rightLvl">
+            <option v-for="level in levels" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter" v-for="(value, key) in rightChampion.stats">
-              <p class="sidebar__param-title">{{key}}:</p>
+            <li class="sidebar__parameter" v-for="stat in stats">
+              <p class="sidebar__param-title">{{stat.name}}:</p>
               <p class="sidebar__param-val">
-                <AnimatedNumber :value="value" :roundNumber="2"/>
+                <AnimatedNumber :value="stat.right" :roundNumber="2"/>
               </p>
             </li>
           </ul>
@@ -160,6 +158,10 @@
   import itemStore from './item_store'
 
   export default {
+    created () {
+      this.$store.dispatch('calculateStats', { side: 'right' })
+      this.$store.dispatch('calculateStats', { side: 'left' })
+    },
     data: function () {
       return {
         showRunes: false,
@@ -175,8 +177,31 @@
         'leftChampion',
         'rightChampion',
         'chanceLeft',
-        'chanceRight'
-      ])
+        'chanceRight',
+        'leftLevel',
+        'rightLevel',
+        'stats'
+      ]),
+      leftLvl: {
+        get () {
+          return this.leftLevel
+        },
+        set (value) {
+          this.$store.commit('setLeftLevel', { value })
+          this.$store.dispatch('calculateStats', { side: 'left' })
+          this.claculate()
+        }
+      },
+      rightLvl: {
+        get () {
+          return this.rightLevel
+        },
+        set (value) {
+          this.$store.commit('setRightLevel', { value })
+          this.$store.dispatch('calculateStats', { side: 'right' })
+          this.claculate()
+        }
+      }
     },
     components: {
       talants,
@@ -187,7 +212,7 @@
       BarChart
     },
     methods: {
-      ...mapMutations([
+      ...mapActions([
         'claculate'
       ]),
       championImageUrl (champion) {
