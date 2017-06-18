@@ -22,6 +22,11 @@ const state = {
       left: 0,
       right: 0
     },
+    attackSpeed: {
+      name: 'Attack speed',
+      left: 0,
+      right: 0
+    },
     cooldownReduction: {
       name: 'Cooldown reduction',
       left: 0,
@@ -104,11 +109,59 @@ const mutations = {
     if (payload.level === 1) {
       state.stats.health[payload.side] = payload.stats.hp
     } else {
-      const additionalHelth = payload.stats.hpperlevel * payload.level - payload.stats.hpperlevel
+      const additionalHelth = payload.stats.hpperlevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
       state.stats.health[payload.side] = payload.stats.hp + additionalHelth
     }
-
-  }
+  },
+  setAttackDamage (state, payload) {
+    if (payload.level === 1) {
+      state.stats.attackDamage[payload.side] = payload.stats.attackdamage
+    } else {
+      const additionalAttackDamage = payload.stats.attackdamageperlevel * payload.level -
+        payload.stats.attackdamageperlevel
+      state.stats.attackDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
+    }
+  },
+  setArmor (state, payload) {
+    if (payload.level === 1) {
+      state.stats.armor[payload.side] = payload.stats.armor
+    } else {
+      const additionalArmor = payload.stats.armorperlevel * payload.level -
+        payload.stats.armorperlevel
+      state.stats.armor[payload.side] = payload.stats.armor + additionalArmor
+    }
+  },
+  setMana (state, payload) {
+    if (payload.level === 1) {
+      state.stats.mana[payload.side] = payload.stats.mp
+    } else {
+      const additionalMana = payload.stats.mpperlevel * payload.level -
+        payload.stats.mpperlevel
+      state.stats.mana[payload.side] = payload.stats.mp + additionalMana
+    }
+  },
+  setHpRegen (state, payload) {
+    if (payload.level === 1) {
+      state.stats.healthRegeneration[payload.side] = payload.stats.hpregen
+    } else {
+      const additionalHpRegen = payload.stats.hpregenperlevel * payload.level -
+        payload.stats.hpregenperlevel
+      state.stats.healthRegeneration[payload.side] = payload.stats.hpregen + additionalHpRegen
+    }
+  },
+  setMovenmentSpeed (state, payload) {
+    state.stats.movenmentSpeed[payload.side] = payload.stats.movespeed
+  },
+  setAttackSpeed (state, payload) {
+    const attackSpped = 0.625/(1 + payload.stats.attackspeedoffset)
+    const attackSppedPerLevel = attackSpped * payload.stats.attackspeedperlevel/100
+    if (payload.level === 1) {
+      state.stats.attackSpeed[payload.side] = attackSpped
+    } else {
+      const additionalAttackSpeed = attackSppedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
+      state.stats.attackSpeed[payload.side] = attackSpped + additionalAttackSpeed
+    }
+  },
 }
 
 const actions = {
@@ -123,6 +176,12 @@ const actions = {
     const stats = context.rootGetters[`${side}Champion`].stats
     const level = context.rootGetters[`${side}Level`]
     context.commit('setHelth', { side, stats, level })
+    context.commit('setAttackDamage', { side, stats, level })
+    context.commit('setArmor', { side, stats, level })
+    context.commit('setMana', { side, stats, level })
+    context.commit('setHpRegen', { side, stats, level })
+    context.commit('setMovenmentSpeed', { side, stats, level })
+    context.commit('setAttackSpeed', { side, stats, level })
   }
 }
 
