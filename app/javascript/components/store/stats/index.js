@@ -97,7 +97,9 @@ const state = {
       left: 0,
       right: 0
     }
-  }
+  },
+  magicResistMeleeConst: 30.85,
+  magicResistRangedConst: 29.5
 }
 
 const getters = {
@@ -162,6 +164,10 @@ const mutations = {
       state.stats.attackSpeed[payload.side] = attackSpped + additionalAttackSpeed
     }
   },
+  setMagicResist (state, payload) {
+    // Here we should define champion type (ranged/melee)
+    state.stats.magicResistance[payload.side] = state.magicResistMeleeConst + (1.25 * payload.level)
+  }
 }
 
 const actions = {
@@ -182,6 +188,7 @@ const actions = {
     context.commit('setHpRegen', { side, stats, level })
     context.commit('setMovenmentSpeed', { side, stats, level })
     context.commit('setAttackSpeed', { side, stats, level })
+    context.commit('setMagicResist', { side, stats, level })
   }
 }
 
