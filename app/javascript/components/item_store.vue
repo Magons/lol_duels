@@ -230,6 +230,8 @@
                     <div class="pic">
                       <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" alt="pic" width="38" height="38">
                     </div>
+                    <!-- description -->
+                    <!-- {{item.data.description}} -->
                     <div class="price">
                       {{item.data.gold.base}}
                     </div>
