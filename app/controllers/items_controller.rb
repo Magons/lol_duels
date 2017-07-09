@@ -3,4 +3,9 @@ class ItemsController < ApplicationController
     @items = Item.all
     render layout: 'admin'
   end
+
+  def all
+    @items = Item.all
+    render json: @items
+  end
 end

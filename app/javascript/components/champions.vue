@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-champion" v-if="show">
+  <div class="modal-champion" v-show="show">
     <button class="close-btn" @click="close()">Close</button>
     <h1 class="moodal-champion__header">Выбор чемпиона</h1>
     <div class="modal-champion__search">

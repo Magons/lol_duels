@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'items/index'
 
+  get 'items/all'
+
   root to: 'fight#index'
 
   get 'fight/index'

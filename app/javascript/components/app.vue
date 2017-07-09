@@ -32,7 +32,7 @@
           </ul>
 
           <button class="sidebar__yellow-btn" type="button" @click="changeItems('Left')">Магазин</button>
-          <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Left')">Руны</button>
+          <!-- <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Left')">Руны</button>
           <button class="sidebar__yellow-btn" type="button" @click="changeTalants('Left')">Таланты</button>
 
           <label for="act-skills-left" class="sidebar__active-skills">
@@ -44,7 +44,7 @@
             Использовать заклинания призывателя
             <input type="checkbox" class="sidebar__checkbox" id="act-spell-left">
             <i class="sidebar__empty"></i>
-          </label>
+          </label> -->
         </div> <!-- end of sidebar  sidebar--left -->
 
         <section class="center">
@@ -66,12 +66,11 @@
                 <p class="center__hero-name">{{leftChampion.name}}</p>
               </div>
               <ul class="center__hero-items">
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
+                <li class="center__hero-item" v-for="item in purchasedLeftItems">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                </li>
+                <li class="center__hero-item" v-for="item in emptyLeftSlots">
+                </li>
               </ul>
             </div>
             <div class="center__vs">VS</div>
@@ -81,12 +80,11 @@
                 <p class="center__hero-name">{{rightChampion.name}}</p>
               </div>
               <ul class="center__hero-items">
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
-                <li class="center__hero-item"></li>
+                <li class="center__hero-item" v-for="item in purchasedRightItems">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                </li>
+                <li class="center__hero-item" v-for="item in emptyRightSlots">
+                </li>
               </ul>
             </div>
           </div>
@@ -110,7 +108,7 @@
           </ul>
 
            <button class="sidebar__yellow-btn" type="button" @click="changeItems('Right')">Магазин</button>
-           <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Right')">Руны</button>
+           <!-- <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Right')">Руны</button>
            <button class="sidebar__yellow-btn" type="button" @click="changeTalants('Right')">Таланты</button>
 
            <label for="act-skills-right" class="sidebar__active-skills">
@@ -122,7 +120,7 @@
              Использовать заклинания призывателя
              <input type="checkbox" class="sidebar__checkbox" id="act-spell-right">
              <i class="sidebar__empty"></i>
-           </label>
+           </label> -->
 
         </div><!-- end of sidebar  sidebar--right -->
 
@@ -180,7 +178,11 @@
         'chanceRight',
         'leftLevel',
         'rightLevel',
-        'stats'
+        'stats',
+        'emptyLeftSlots',
+        'purchasedLeftItems',
+        'emptyRightSlots',
+        'purchasedRightItems'
       ]),
       leftLvl: {
         get () {
