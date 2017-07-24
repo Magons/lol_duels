@@ -99,7 +99,42 @@ const state = {
     }
   },
   magicResistMeleeConst: 30.85,
-  magicResistRangedConst: 29.5
+  magicResistRangedConst: 29.5,
+  itemsDto: [
+    'PercentCritDamageMod',
+    'PercentSpellBlockMod',
+    'PercentHPRegenMod',
+    'PercentMovementSpeedMod',
+    'FlatSpellBlockMod',
+    'FlatCritDamageMod',
+    'FlatEnergyPoolMod',
+    'PercentLifeStealMod',
+    'FlatMPPoolMod',
+    'FlatMovementSpeedMod',
+    'PercentAttackSpeedMod',
+    'FlatBlockMod',
+    'PercentBlockMod',
+    'FlatEnergyRegenMod ',
+    'PercentSpellVampMod',
+    'FlatMPRegenMod ',
+    'PercentDodgeMod',
+    'FlatAttackSpeedMod ',
+    'FlatArmorMod',
+    'FlatHPRegenMod',
+    'PercentMagicDamageMod',
+    'PercentMPPoolMod',
+    'FlatMagicDamageMod ',
+    'PercentMPRegenMod',
+    'PercentPhysicalDamageMod',
+    'FlatPhysicalDamageMod',
+    'PercentHPPoolMod',
+    'PercentArmorMod',
+    'PercentCritChanceMod',
+    'PercentEXPBonus',
+    'FlatHPPoolMod',
+    'FlatCritChanceMod',
+    'FlatEXPBonus'
+  ]
 }
 
 const getters = {
