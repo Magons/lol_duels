@@ -19,7 +19,7 @@
             Выбор чемпиона
           </button>
           <select v-model="leftLvl">
-            <option v-for="level in levels" :value="level">{{level}}</option>
+            <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
@@ -95,7 +95,7 @@
             Выбор чемпиона
           </button>
           <select v-model="rightLvl">
-            <option v-for="level in levels" :value="level">{{level}}</option>
+            <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Характеристики:</h2>
           <ul class="sidebar__parameter-list">
@@ -156,6 +156,11 @@
   import itemStore from './item_store'
 
   export default {
+    watch: {
+      stats () {
+        this.calculate()
+      }
+    },
     created () {
       this.$store.dispatch('calculateStats', { side: 'right' })
       this.$store.dispatch('calculateStats', { side: 'left' })
@@ -166,8 +171,7 @@
         showTalants: false,
         showItemStore: false,
         showChampions: false,
-        side: 'Left',
-        levels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+        side: 'Left'
       }
     },
     computed: {
@@ -191,7 +195,7 @@
         set (value) {
           this.$store.commit('setLeftLevel', { value })
           this.$store.dispatch('calculateStats', { side: 'left' })
-          this.claculate()
+          this.calculate()
         }
       },
       rightLvl: {
@@ -201,7 +205,7 @@
         set (value) {
           this.$store.commit('setRightLevel', { value })
           this.$store.dispatch('calculateStats', { side: 'right' })
-          this.claculate()
+          this.calculate()
         }
       }
     },
@@ -215,7 +219,7 @@
     },
     methods: {
       ...mapActions([
-        'claculate'
+        'calculate'
       ]),
       championImageUrl (champion) {
         const championName = champion.id === 'FiddleSticks' ? 'Fiddlesticks' : champion.id

@@ -225,7 +225,7 @@
             </div>
             <div class="block-view">
               <div class="block-2">
-                <div class="row" v-for="item in filterItems(filter)" @click.stop.prevent="buyItem({ value: item, side })">
+                <div class="row" v-for="item in filterItems(filter)" @click.stop.prevent="addItemToChampion(item)">
                   <div class="icon">
                     <div class="pic">
                       <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" alt="pic" width="38" height="38">
@@ -536,7 +536,8 @@
     methods: {
       ...mapMutations([
         'buyItem',
-        'sellItem'
+        'sellItem',
+        'addItem'
       ]),
       ...mapActions([
         'getItems'
@@ -546,6 +547,10 @@
       },
       changeFilter (string) {
         this.filter = string
+      },
+      addItemToChampion (item) {
+        this.buyItem({ value: item, side: this.side })
+        this.addItem({ item, side: this.side })
       }
     }
   }

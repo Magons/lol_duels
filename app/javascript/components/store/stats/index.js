@@ -2,98 +2,171 @@ import axios from 'axios'
 
 const state = {
   stats: {
-    abilityPower: {
+    MagicDamage: {
+      show: true,
       name: 'Ability power',
       left: 0,
       right: 0
     },
-    armor: {
+    Armor: {
+      show: true,
       name: 'Armor',
       left: 0,
       right: 0
     },
-    armorPenetration: {
+    ArmorPenetration: {
+      show: true,
       name: 'Armor penetration',
       left: 0,
       right: 0
     },
-    attackDamage: {
-      name: 'Attack damage',
+    PhysicalDamage: {
+      show: true,
+      name: 'Physical Damage',
       left: 0,
       right: 0
     },
-    attackSpeed: {
+    AttackSpeed: {
+      show: true,
       name: 'Attack speed',
       left: 0,
       right: 0
     },
-    cooldownReduction: {
+    Cooldown: {
+      show: true,
       name: 'Cooldown reduction',
       left: 0,
       right: 0
     },
-    criticalStrikeChance: {
+    CritChance: {
+      show: true,
       name: 'Critical strike chance',
       left: 0,
       right: 0
     },
-    criticalStrikeDamage: {
+    CritDamage: {
+      show: true,
       name: 'Critical strike damage',
       left: 0,
       right: 0
     },
     damageAmplification: {
+      show: true,
       name: 'Damage amplification',
       left: 0,
       right: 0
     },
-    health: {
+    HP: {
+      show: true,
       name: 'Health',
       left: 0,
       right: 0
     },
-    healthRegeneration: {
+    HPRegen: {
+      show: true,
       name: 'Health regeneration',
       left: 0,
       right: 0
     },
-    lifeSteal: {
+    LifeSteal: {
+      show: true,
       name: 'Life steal',
       left: 0,
       right: 0
     },
-    magicPenetration: {
+    MagicPenetration: {
+      show: true,
       name: 'Magic penetration',
       left: 0,
       right: 0
     },
     magicResistance: {
+      show: true,
       name: 'Magic resistance',
       left: 0,
       right: 0
     },
-    magicResistanceReduction: {
+    SpellBlock: {
+      show: true,
       name: 'Magic resistance reduction',
       left: 0,
       right: 0
     },
-    mana: {
+    MP: {
+      show: true,
       name: 'Mana',
       left: 0,
       right: 0
     },
-    manaRegeneration: {
+    MPRegen: {
+      show: true,
       name: 'Mana regeneration',
       left: 0,
       right: 0
     },
-    spellVamp: {
+    SpellVamp: {
+      show: true,
       name: 'Spell vamp',
       left: 0,
       right: 0
     },
-    movenmentSpeed: {
+    MovementSpeed: {
+      show: true,
       name: 'Movenment speed',
+      left: 0,
+      right: 0
+    },
+    EnergyRegen: {
+      show: true,
+      name: 'EnergyRegen',
+      left: 0,
+      right: 0
+    },
+    EnergyPool: {
+      show: true,
+      name: 'EnergyPool',
+      left: 0,
+      right: 0
+    },
+    MPPool: {
+      show: true,
+      name: 'MPPool',
+      left: 0,
+      right: 0
+    },
+    Dodge: {
+      show: true,
+      name: 'Dodge',
+      left: 0,
+      right: 0
+    },
+    Block: {
+      show: true,
+      name: 'Block',
+      left: 0,
+      right: 0
+    },
+    HPPool: {
+      show: true,
+      name: 'HPPool',
+      left: 0,
+      right: 0
+    },
+    Energy: {
+      show: true,
+      name: 'Energy',
+      left: 0,
+      right: 0
+    },
+    GoldPer10: {
+      show: true,
+      name: 'GoldPer10',
+      left: 0,
+      right: 0
+    },
+    TimeDead: {
+      show: true,
+      name: 'GoldPer10',
       left: 0,
       right: 0
     }
@@ -101,36 +174,68 @@ const state = {
   magicResistMeleeConst: 30.85,
   magicResistRangedConst: 29.5,
   itemsDto: [
+    'PercentTimeDeadModPerLevel',
+    'PercentArmorPenetrationModPerLevel',
     'PercentCritDamageMod',
     'PercentSpellBlockMod',
     'PercentHPRegenMod',
     'PercentMovementSpeedMod',
     'FlatSpellBlockMod',
-    'FlatCritDamageMod',
+    'FlatEnergyRegenModPerLevel',
     'FlatEnergyPoolMod',
+    'FlatMagicPenetrationModPerLevel',
     'PercentLifeStealMod',
     'FlatMPPoolMod',
+    'PercentCooldownMod',
+    'PercentMagicPenetrationMod',
+    'FlatArmorPenetrationModPerLevel',
     'FlatMovementSpeedMod',
+    'FlatTimeDeadModPerLevel',
+    'FlatArmorModPerLevel',
     'PercentAttackSpeedMod',
-    'FlatBlockMod',
-    'PercentBlockMod',
-    'FlatEnergyRegenMod ',
-    'PercentSpellVampMod',
-    'FlatMPRegenMod ',
-    'PercentDodgeMod',
-    'FlatAttackSpeedMod ',
-    'FlatArmorMod',
-    'FlatHPRegenMod',
+    'FlatDodgeModPerLevel',
     'PercentMagicDamageMod',
-    'PercentMPPoolMod',
-    'FlatMagicDamageMod ',
-    'PercentMPRegenMod',
-    'PercentPhysicalDamageMod',
-    'FlatPhysicalDamageMod',
+    'PercentBlockMod',
+    'FlatDodgeMod',
+    'FlatEnergyRegenMod',
+    'FlatHPModPerLevel',
+    'PercentAttackSpeedModPerLevel',
+    'PercentSpellVampMod',
+    'FlatMPRegenMod',
     'PercentHPPoolMod',
+    'PercentDodgeMod',
+    'FlatAttackSpeedMod',
+    'FlatArmorMod',
+    'FlatMagicDamageModPerLevel',
+    'FlatHPRegenMod',
+    'PercentPhysicalDamageMod',
+    'FlatCritChanceModPerLevel',
+    'FlatSpellBlockModPerLevel',
+    'PercentTimeDeadMod',
+    'FlatBlockMod',
+    'PercentMPPoolMod',
+    'FlatMagicDamageMod',
+    'PercentMPRegenMod',
+    'PercentMovementSpeedModPerLevel',
+    'PercentCooldownModPerLevel',
+    'FlatMPModPerLevel',
+    'FlatEnergyModPerLevel',
+    'FlatPhysicalDamageMod',
+    'FlatHPRegenModPerLevel',
+    'FlatCritDamageMod',
     'PercentArmorMod',
+    'FlatMagicPenetrationMod',
     'PercentCritChanceMod',
+    'FlatPhysicalDamageModPerLevel',
+    'PercentArmorPenetrationMod',
     'PercentEXPBonus',
+    'FlatMPRegenModPerLevel',
+    'PercentMagicPenetrationModPerLevel',
+    'FlatTimeDeadMod',
+    'FlatMovementSpeedModPerLevel',
+    'FlatGoldPer10Mod',
+    'FlatArmorPenetrationMod',
+    'FlatCritDamageModPerLevel',
     'FlatHPPoolMod',
     'FlatCritChanceMod',
     'FlatEXPBonus'
@@ -144,64 +249,81 @@ const getters = {
 const mutations = {
   setHelth (state, payload) {
     if (payload.level === 1) {
-      state.stats.health[payload.side] = payload.stats.hp
+      state.stats.HP[payload.side] = payload.stats.hp
     } else {
       const additionalHelth = payload.stats.hpperlevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
-      state.stats.health[payload.side] = payload.stats.hp + additionalHelth
+      state.stats.HP[payload.side] = payload.stats.hp + additionalHelth
     }
   },
-  setAttackDamage (state, payload) {
+  setPhysicalDamage (state, payload) {
     if (payload.level === 1) {
-      state.stats.attackDamage[payload.side] = payload.stats.attackdamage
+      state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage
     } else {
       const additionalAttackDamage = payload.stats.attackdamageperlevel * payload.level -
         payload.stats.attackdamageperlevel
-      state.stats.attackDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
+      state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
     }
   },
   setArmor (state, payload) {
     if (payload.level === 1) {
-      state.stats.armor[payload.side] = payload.stats.armor
+      state.stats.Armor[payload.side] = payload.stats.armor
     } else {
       const additionalArmor = payload.stats.armorperlevel * payload.level -
         payload.stats.armorperlevel
-      state.stats.armor[payload.side] = payload.stats.armor + additionalArmor
+      state.stats.Armor[payload.side] = payload.stats.armor + additionalArmor
     }
   },
   setMana (state, payload) {
     if (payload.level === 1) {
-      state.stats.mana[payload.side] = payload.stats.mp
+      state.stats.MPPool[payload.side] = payload.stats.mp
     } else {
       const additionalMana = payload.stats.mpperlevel * payload.level -
         payload.stats.mpperlevel
-      state.stats.mana[payload.side] = payload.stats.mp + additionalMana
+      state.stats.MPPool[payload.side] = payload.stats.mp + additionalMana
     }
   },
   setHpRegen (state, payload) {
     if (payload.level === 1) {
-      state.stats.healthRegeneration[payload.side] = payload.stats.hpregen
+      state.stats.HPRegen[payload.side] = payload.stats.hpregen
     } else {
       const additionalHpRegen = payload.stats.hpregenperlevel * payload.level -
         payload.stats.hpregenperlevel
-      state.stats.healthRegeneration[payload.side] = payload.stats.hpregen + additionalHpRegen
+      state.stats.HPRegen[payload.side] = payload.stats.hpregen + additionalHpRegen
     }
   },
   setMovenmentSpeed (state, payload) {
-    state.stats.movenmentSpeed[payload.side] = payload.stats.movespeed
+    state.stats.MovementSpeed[payload.side] = payload.stats.movespeed
   },
   setAttackSpeed (state, payload) {
     const attackSpped = 0.625/(1 + payload.stats.attackspeedoffset)
-    const attackSppedPerLevel = attackSpped * payload.stats.attackspeedperlevel/100
+    const attackSppedPerLevel = attackSpped * payload.stats.attackspeedperlevel / 100
     if (payload.level === 1) {
-      state.stats.attackSpeed[payload.side] = attackSpped
+      state.stats.AttackSpeed[payload.side] = attackSpped
     } else {
       const additionalAttackSpeed = attackSppedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
-      state.stats.attackSpeed[payload.side] = attackSpped + additionalAttackSpeed
+      state.stats.AttackSpeed[payload.side] = attackSpped + additionalAttackSpeed
     }
   },
   setMagicResist (state, payload) {
     // Here we should define champion type (ranged/melee)
-    state.stats.magicResistance[payload.side] = state.magicResistMeleeConst + (1.25 * payload.level)
+    state.stats.SpellBlock[payload.side] = state.magicResistMeleeConst + (1.25 * payload.level)
+  },
+  addItem (state, payload) {
+    const stats = payload.item.data.stats
+    for (let key in stats) {
+      if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
+
+      } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
+
+      } else if (key.match(/^Percent([A-z]+)Mod$/)) {
+
+      } else if (key.match(/^Flat([A-z]+)Mod$/)) {
+        const item = key.match(/^Flat([A-z]+)Mod$/)[1]
+        state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
+      }
+      console.log(stats[key])
+    }
+    state.asdfasf = payload
   }
 }
 
@@ -217,7 +339,7 @@ const actions = {
     const stats = context.rootGetters[`${side}Champion`].stats
     const level = context.rootGetters[`${side}Level`]
     context.commit('setHelth', { side, stats, level })
-    context.commit('setAttackDamage', { side, stats, level })
+    context.commit('setPhysicalDamage', { side, stats, level })
     context.commit('setArmor', { side, stats, level })
     context.commit('setMana', { side, stats, level })
     context.commit('setHpRegen', { side, stats, level })

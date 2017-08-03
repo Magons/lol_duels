@@ -3,13 +3,13 @@ class Fighter
               :mana, :damage
 
   def initialize(stats, side)
-    @attack_speed  = stats['attackSpeed'][side]
-    @armor         = stats['armor'][side]
-    @attack_damage = stats['attackDamage'][side]
-    @health        = stats['health'][side]
-    @magic_resist  = stats['magicResistance'][side]
-    @health_regen  = stats['healthRegeneration'][side]
-    @mana          = stats['mana'][side]
+    @attack_speed  = stats['AttackSpeed'][side]
+    @armor         = stats['Armor'][side]
+    @attack_damage = stats['PhysicalDamage'][side]
+    @health        = stats['HP'][side]
+    @magic_resist  = stats['SpellBlock'][side]
+    @health_regen  = stats['HPRegen'][side]
+    @mana          = stats['MPPool'][side]
   end
 
   def damage

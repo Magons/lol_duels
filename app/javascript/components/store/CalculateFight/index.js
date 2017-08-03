@@ -22,7 +22,7 @@ const mutations = {
 }
 
 const actions = {
-  claculate (context) {
+  calculate (context) {
     axios.post('/fight/calculate', {
       stats: context.rootGetters.stats
     })
