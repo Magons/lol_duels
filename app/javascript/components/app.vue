@@ -6,8 +6,8 @@
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
         </div>
         <div class="header__user-block">
-          <button class="header__user-btn" type="button">Вход</button>
-          <button class="header__user-btn" type="button">Регистрация</button>
+          <button class="header__user-btn" type="button">LogIn</button>
+          <button class="header__user-btn" type="button">Registration</button>
         </div>
       </div>
     </header>
@@ -16,14 +16,14 @@
       <div class="main__container">
         <div class="sidebar  sidebar--left">
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Left')">
-            Выбор чемпиона
+            Choose the champion
           </button>
           <select v-model="leftLvl">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
-          <h2 class="sidebar__characteristics">Характеристики:</h2>
+          <h2 class="sidebar__characteristics">Stats:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter" v-for="stat in stats">
+            <li class="sidebar__parameter" v-for="stat in stats" v-if="stat.show">
               <p class="sidebar__param-title">{{stat.name}}:</p>
               <p class="sidebar__param-val">
                 <AnimatedNumber :value="stat.left" :roundNumber="2"/>
@@ -31,7 +31,7 @@
             </li>
           </ul>
 
-          <button class="sidebar__yellow-btn" type="button" @click="changeItems('Left')">Магазин</button>
+          <button class="sidebar__yellow-btn" type="button" @click="changeItems('Left')">Store</button>
           <!-- <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Left')">Руны</button>
           <button class="sidebar__yellow-btn" type="button" @click="changeTalants('Left')">Таланты</button>
 
@@ -49,7 +49,7 @@
 
         <section class="center">
 
-          <h1 class="center__header">Вероятность победы</h1>
+          <h1 class="center__header">Probability of winning</h1>
           <BarChart :value="chanceRight"/>
           <div class="center__ratio">
             <div class="center__ratio-left">
@@ -92,14 +92,14 @@
 
         <div class="sidebar  sidebar--right">
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Right')">
-            Выбор чемпиона
+            Choose the champion
           </button>
           <select v-model="rightLvl">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
-          <h2 class="sidebar__characteristics">Характеристики:</h2>
+          <h2 class="sidebar__characteristics">Stats:</h2>
           <ul class="sidebar__parameter-list">
-            <li class="sidebar__parameter" v-for="stat in stats">
+            <li class="sidebar__parameter" v-for="stat in stats" v-if="stat.show">
               <p class="sidebar__param-title">{{stat.name}}:</p>
               <p class="sidebar__param-val">
                 <AnimatedNumber :value="stat.right" :roundNumber="2"/>
@@ -107,7 +107,7 @@
             </li>
           </ul>
 
-           <button class="sidebar__yellow-btn" type="button" @click="changeItems('Right')">Магазин</button>
+           <button class="sidebar__yellow-btn" type="button" @click="changeItems('Right')">Store</button>
            <!-- <button class="sidebar__yellow-btn" type="button" @click="changeRunes('Right')">Руны</button>
            <button class="sidebar__yellow-btn" type="button" @click="changeTalants('Right')">Таланты</button>
 

@@ -398,7 +398,7 @@
         </div>
           <div class="block-3">
           <div class="left">
-            <div class="pic" v-for="item in purchasedItems" @click.stop="sellItem({ value: item, side })">
+            <div class="pic" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
               <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
             </div>
             <div class="pic" v-for="item in emptySlots">
@@ -537,7 +537,8 @@
       ...mapMutations([
         'buyItem',
         'sellItem',
-        'addItem'
+        'addItem',
+        'removeItem'
       ]),
       ...mapActions([
         'getItems'
@@ -551,6 +552,10 @@
       addItemToChampion (item) {
         this.buyItem({ value: item, side: this.side })
         this.addItem({ item, side: this.side })
+      },
+      removeItemFromChampion (item) {
+        this.sellItem({ value: item, side: this.side })
+        this.removeItem({ item, side: this.side })
       }
     }
   }

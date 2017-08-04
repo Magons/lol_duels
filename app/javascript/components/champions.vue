@@ -7,8 +7,8 @@
     </div>
     <ul class="modal-champion__item-list">
       <li class="modal-champion__item" v-for="champion in champions"
-        @click="setChampion(champion)">
-        <img :src="`https://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${champion.image.full}`"/>
+        @click="setChampion(champion.data)">
+        <img :src="`https://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${champion.data.image.full}`"/>
         <p class="modal-champion__hero-name">{{champion.name}}</p>
       </li>
     </ul>

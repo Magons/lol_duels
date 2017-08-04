@@ -51,7 +51,7 @@ const state = {
       attackspeedperlevel: 3.0
     }
   },
-  rightLevel: 1,
+  rightLevel: 18,
   rightChampion: {
     version: '6.24.1',
     id: 'Aatrox',
@@ -133,9 +133,10 @@ const mutations = {
 
 const actions = {
   getChampions (context) {
-    axios.get('https://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
+    axios.get('/champions/all')
       .then((response) => {
-        context.commit('setChampions', { value: response.data.data })
+        debugger
+        context.commit('setChampions', { value: response.data })
       })
   }
 }

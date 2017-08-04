@@ -3,4 +3,9 @@ class ChampionsController < ApplicationController
     @champions = Champion.all
     render layout: 'admin'
   end
+
+  def all
+    @champions = Champion.all
+    render json: @champions
+  end
 end

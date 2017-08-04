@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'champions/index'
 
+  get 'champions/all'
+
   get 'runes/index'
 
   get 'items/index'

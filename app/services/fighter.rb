@@ -6,7 +6,7 @@ class Fighter
     @attack_speed  = stats['AttackSpeed'][side]
     @armor         = stats['Armor'][side]
     @attack_damage = stats['PhysicalDamage'][side]
-    @health        = stats['HP'][side]
+    @health        = stats['HPPool'][side]
     @magic_resist  = stats['SpellBlock'][side]
     @health_regen  = stats['HPRegen'][side]
     @mana          = stats['MPPool'][side]

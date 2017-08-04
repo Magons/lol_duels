@@ -2,9 +2,57 @@ import axios from 'axios'
 
 const state = {
   stats: {
-    MagicDamage: {
+    HPRegen: {
       show: true,
-      name: 'Ability power',
+      name: 'Health Regeneration',
+      left: 0,
+      right: 0
+    },
+    ArmorPenetration: {
+      show: true,
+      name: 'Lethality | Armor Penetration',
+      left: 0,
+      right: 0
+    },
+    LifeSteal: {
+      show: true,
+      name: 'Life Steal',
+      left: 0,
+      right: 0
+    },
+    AttackRange: {
+      show: true,
+      name: 'Attack Range',
+      left: 0,
+      right: 0
+    },
+    MPRegeneration: {
+      show: true,
+      name: 'Resource Regeneration',
+      left: 0,
+      right: 0
+    },
+    MagicPenetration: {
+      show: true,
+      name: 'Magic Penetration',
+      left: 0,
+      right: 0
+    },
+    SpellVamp: {
+      show: true,
+      name: 'Spell Vamp',
+      left: 0,
+      right: 0
+    },
+    Tenacity: {
+      show: true,
+      name: 'Tenacity',
+      left: 0,
+      right: 0
+    },
+    PhysicalDamage: {
+      show: true,
+      name: 'Attack Damage',
       left: 0,
       right: 0
     },
@@ -14,159 +62,123 @@ const state = {
       left: 0,
       right: 0
     },
-    ArmorPenetration: {
-      show: true,
-      name: 'Armor penetration',
-      left: 0,
-      right: 0
-    },
-    PhysicalDamage: {
-      show: true,
-      name: 'Physical Damage',
-      left: 0,
-      right: 0
-    },
     AttackSpeed: {
       show: true,
-      name: 'Attack speed',
-      left: 0,
-      right: 0
-    },
-    Cooldown: {
-      show: true,
-      name: 'Cooldown reduction',
+      name: 'Attack Speed',
       left: 0,
       right: 0
     },
     CritChance: {
       show: true,
-      name: 'Critical strike chance',
+      name: 'Critical Strike',
       left: 0,
       right: 0
     },
-    CritDamage: {
+    MagicDamage: {
       show: true,
-      name: 'Critical strike damage',
-      left: 0,
-      right: 0
-    },
-    damageAmplification: {
-      show: true,
-      name: 'Damage amplification',
-      left: 0,
-      right: 0
-    },
-    HP: {
-      show: true,
-      name: 'Health',
-      left: 0,
-      right: 0
-    },
-    HPRegen: {
-      show: true,
-      name: 'Health regeneration',
-      left: 0,
-      right: 0
-    },
-    LifeSteal: {
-      show: true,
-      name: 'Life steal',
-      left: 0,
-      right: 0
-    },
-    MagicPenetration: {
-      show: true,
-      name: 'Magic penetration',
-      left: 0,
-      right: 0
-    },
-    magicResistance: {
-      show: true,
-      name: 'Magic resistance',
+      name: 'Ability Power',
       left: 0,
       right: 0
     },
     SpellBlock: {
       show: true,
-      name: 'Magic resistance reduction',
+      name: 'Magic Resistance',
       left: 0,
       right: 0
     },
-    MP: {
+    Cooldown: {
       show: true,
-      name: 'Mana',
-      left: 0,
-      right: 0
-    },
-    MPRegen: {
-      show: true,
-      name: 'Mana regeneration',
-      left: 0,
-      right: 0
-    },
-    SpellVamp: {
-      show: true,
-      name: 'Spell vamp',
+      name: 'Cooldown Reduction',
       left: 0,
       right: 0
     },
     MovementSpeed: {
       show: true,
-      name: 'Movenment speed',
-      left: 0,
-      right: 0
-    },
-    EnergyRegen: {
-      show: true,
-      name: 'EnergyRegen',
-      left: 0,
-      right: 0
-    },
-    EnergyPool: {
-      show: true,
-      name: 'EnergyPool',
-      left: 0,
-      right: 0
-    },
-    MPPool: {
-      show: true,
-      name: 'MPPool',
-      left: 0,
-      right: 0
-    },
-    Dodge: {
-      show: true,
-      name: 'Dodge',
-      left: 0,
-      right: 0
-    },
-    Block: {
-      show: true,
-      name: 'Block',
+      name: 'Movenment Speed',
       left: 0,
       right: 0
     },
     HPPool: {
       show: true,
-      name: 'HPPool',
+      name: 'Health',
+      left: 0,
+      right: 0
+    },
+    MPPool: {
+      show: true,
+      name: 'Mana',
+      left: 0,
+      right: 0
+    },
+    CritDamage: {
+      show: false,
+      name: 'Critical strike damage',
+      left: 0,
+      right: 0
+    },
+    damageAmplification: {
+      show: false,
+      name: 'Damage amplification',
+      left: 0,
+      right: 0
+    },
+    HP: {
+      show: false,
+      name: 'Health',
+      left: 0,
+      right: 0
+    },
+    magicResistance: {
+      show: false,
+      name: 'Magic resistance',
+      left: 0,
+      right: 0
+    },
+    MP: {
+      show: false,
+      name: 'Mana',
+      left: 0,
+      right: 0
+    },
+    EnergyRegen: {
+      show: false,
+      name: 'EnergyRegen',
+      left: 0,
+      right: 0
+    },
+    EnergyPool: {
+      show: false,
+      name: 'EnergyPool',
+      left: 0,
+      right: 0
+    },
+    Dodge: {
+      show: false,
+      name: 'Dodge',
+      left: 0,
+      right: 0
+    },
+    Block: {
+      show: false,
+      name: 'Block',
       left: 0,
       right: 0
     },
     Energy: {
-      show: true,
+      show: false,
       name: 'Energy',
       left: 0,
       right: 0
     },
     GoldPer10: {
-      show: true,
+      show: false,
       name: 'GoldPer10',
       left: 0,
       right: 0
     },
     TimeDead: {
-      show: true,
-      name: 'GoldPer10',
+      show: false,
+      name: 'TimeDead',
       left: 0,
       right: 0
     }
@@ -249,10 +261,10 @@ const getters = {
 const mutations = {
   setHelth (state, payload) {
     if (payload.level === 1) {
-      state.stats.HP[payload.side] = payload.stats.hp
+      state.stats.HPPool[payload.side] = payload.stats.hp
     } else {
       const additionalHelth = payload.stats.hpperlevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
-      state.stats.HP[payload.side] = payload.stats.hp + additionalHelth
+      state.stats.HPPool[payload.side] = payload.stats.hp + additionalHelth
     }
   },
   setPhysicalDamage (state, payload) {
@@ -321,19 +333,28 @@ const mutations = {
         const item = key.match(/^Flat([A-z]+)Mod$/)[1]
         state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
       }
-      console.log(stats[key])
+      console.log(`${key}: ${stats[key]}`)
     }
-    state.asdfasf = payload
+  },
+  removeItem (state, payload) {
+    const stats = payload.item.data.stats
+    for (let key in stats) {
+      if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
+
+      } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
+
+      } else if (key.match(/^Percent([A-z]+)Mod$/)) {
+
+      } else if (key.match(/^Flat([A-z]+)Mod$/)) {
+        const item = key.match(/^Flat([A-z]+)Mod$/)[1]
+        state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] - stats[key]
+      }
+      console.log(`${key}: ${stats[key]}`)
+    }
   }
 }
 
 const actions = {
-  getChampions (context) {
-    axios.get('https://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
-      .then((response) => {
-        context.commit('setChampions', { value: response.data.data })
-      })
-  },
   calculateStats (context, payload) {
     const side = payload.side.toLowerCase()
     const stats = context.rootGetters[`${side}Champion`].stats
