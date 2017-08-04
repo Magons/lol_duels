@@ -18,7 +18,7 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Left')">
             Choose the champion
           </button>
-          <select v-model="leftLvl">
+          <select v-model="leftLvl" class="sidebar__select">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Stats:</h2>
@@ -94,7 +94,7 @@
           <button class="sidebar__choose-btn" type="button" @click="chooseChampion('Right')">
             Choose the champion
           </button>
-          <select v-model="rightLvl">
+          <select v-model="rightLvl"  class="sidebar__select  sidebar__select--right">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
           <h2 class="sidebar__characteristics">Stats:</h2>

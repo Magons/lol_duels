@@ -1,8 +1,6 @@
 <template>
   <div class="container" v-if="show">
     <button class="container-close" type="button" title="Закрыть" @click="$emit('close')"></button>
-    <button class="recommended-btn" type="button" @click="showReccomended = true">Рекомендованные</button>
-    <button class="all-items-btn" type="button" @click="showReccomended = false">Все предметы</button>
     <div class="content">
       <div class="content-left">
         <div class="search-items">
@@ -416,80 +414,7 @@
           </div>
           </div>
       </div>
-      <div class="content-right">
-        <div class="gallery">
-          <p>Схемы развития:</p>
-          <button class="prev"></button>
-          <div class="content">
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-              <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-          </div>
-          <button class="next"></button>
-        </div>
-        <div class="module-1">
-          <p>Требуется:</p>
-          <div class="row-1">
-            <div class="icon">
-              <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-              </div>
-              <div class="price">
-                0
-              </div>
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="icon">
-              <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-              </div>
-              <div class="price">
-                0
-              </div>
-            </div>
-            <div class="icon">
-              <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-              </div>
-              <div class="price">
-                0
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container-discription">
-          <div class="item-buy">
-            <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
-            </div>
-            <div class="name">Боевой молот Колфилда</div>
-            <div class="price">1100</div>
-            <button class="buy-btn">КУПИТЬ</button>
-          </div>
-          <div class="discription">
-
-          </div>
-        </div>
-      </div>
+      
     </div>
   </div>
 </template>
