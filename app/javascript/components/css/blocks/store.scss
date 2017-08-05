@@ -352,11 +352,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
   overflow: auto;
 }
 .block-2 .row{
+  position: relative;
   display: flex;
   width: 160px;
   height: 60px;
   margin-left: 5px;
   margin-bottom: 11px;
+  border: 1px solid transparent;
+
+  &:nth-child(3n) {
+    .hint {
+      left: 0px;
+    }
+  }
+
+  &:hover {
+     border: 1px solid #717171;
+
+    .hint {
+      display: block;
+    }
+  }
 }
 .icon{
   height: 52px;
