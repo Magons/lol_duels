@@ -52,7 +52,7 @@
 
 <style lang="scss" scoped>
   .center__indicator-inner {
-    height: 33px;
+    height: 26px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background: linear-gradient(to right, #fee07b, #a77e47);
