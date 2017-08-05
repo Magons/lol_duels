@@ -6,8 +6,8 @@
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
         </div>
         <div class="header__user-block">
-          <button class="header__user-btn" type="button">LogIn</button>
-          <button class="header__user-btn" type="button">Registration</button>
+          <button class="header__user-btn" type="button" @click="showLoginModal = true">LogIn</button>
+          <button class="header__user-btn" type="button" @click="showRegistrationModal = true">Registration</button>
         </div>
       </div>
     </header>
@@ -143,6 +143,31 @@
     <runes :show="showRunes" @close="showRunes = false" :side="side"/>
 
     <itemStore :show="showItemStore" @close="showItemStore = false" :side="side"/>
+
+    <Popup v-if="showLoginModal" @close="showLoginModal = false">
+      <p>Log In</p>
+      <form action="/users/sign_in" method="post">
+        <label>Email</label>
+        <input type="email" name="user[email]">
+        <label>Password</label>
+        <input type="password" name="user[password]">
+        <button type="submit">Log In</button>
+        <button @click="showLoginModal = false">Cancel</button>
+      </form>
+    </Popup>
+    <Popup v-if="showRegistrationModal" @close="showRegistrationModal = false">
+      <p>Registration</p>
+      <form action="/users" method="post">
+        <label>Email</label>
+        <input type="email" name="user[email]">
+        <label>Password</label>
+        <input type="password" name="user[password]">
+        <label>Password Confirmation</label>
+        <input type="password" name="user[password_confirmation]">
+        <button type="submit">Sign Up</button>
+        <button @click="showRegistrationModal = false">Cancel</button>
+      </form>
+    </Popup>
   </div>
 </template>
 
@@ -150,6 +175,7 @@
   import { mapGetters, mapMutations, mapActions } from 'vuex'
   import AnimatedNumber from './ui/AnimatedNumber'
   import BarChart from './ui/BarChart'
+  import Popup from './ui/Popup'
   import talants from './talants'
   import runes from './runes'
   import champions from './champions'
@@ -171,6 +197,8 @@
         showTalants: false,
         showItemStore: false,
         showChampions: false,
+        showLoginModal: false,
+        showRegistrationModal: false,
         side: 'Left'
       }
     },
@@ -215,7 +243,8 @@
       champions,
       itemStore,
       AnimatedNumber,
-      BarChart
+      BarChart,
+      Popup
     },
     methods: {
       ...mapActions([

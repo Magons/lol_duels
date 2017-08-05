@@ -3,7 +3,7 @@ import axios from 'axios'
 const state = {
   champions: [],
   searchString: '',
-  leftLevel: 18,
+  leftLevel: 1,
   leftChampion: {
     version: '6.24.1',
     id: 'Aatrox',
@@ -51,7 +51,7 @@ const state = {
       attackspeedperlevel: 3.0
     }
   },
-  rightLevel: 18,
+  rightLevel: 1,
   rightChampion: {
     version: '6.24.1',
     id: 'Aatrox',
