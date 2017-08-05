@@ -48,7 +48,7 @@ const getters = {
   items: state => state.items,
   filterItems (state) {
     return tag => state.items.filter(item => {
-      return tag === '' ? true : item.data.tags.includes(tag)
+      return tag.length === 0 ? true : tag.some(i => item.data.tags.includes(i))
     })
   },
   purchasedLeftItems: state => state.purchasedLeftItems,
