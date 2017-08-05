@@ -135,7 +135,6 @@ const actions = {
   getChampions (context) {
     axios.get('/champions/all')
       .then((response) => {
-        debugger
         context.commit('setChampions', { value: response.data })
       })
   }

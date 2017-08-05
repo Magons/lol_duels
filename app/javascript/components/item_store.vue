@@ -12,111 +12,114 @@
           <div class="wrapper">
             <div class="wrap-all-items">
               <div class="block-1">
-                <p>Все предметы</p>
+                <p>All items</p>
                 <ul class="list"><b>Начальные предметы</b>
-                  <li @click="changeFilter('Lane')">
+                  <li>
                     <label>
-                    Игра в лесу<input type="checkbox"><i></i>
+                      Игра в лесу
+                      <input type="checkbox" value="Jungle" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('Lane')">
+                  <li>
                     <label>
-                    Игра на линии<input type="checkbox"><i></i>
+                      Игра на линии
+                      <input type="checkbox" value="Lane" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
                 <ul class="list"><b>Инструменты</b>
-                  <li @click="changeFilter('Consumable')">
+                  <li>
                     <label>
-                    Расходуемые товары<input type="checkbox"><i></i>
+                      Расходуемые товары
+                      <input type="checkbox" value="Consumable" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('GoldPer')">
+                  <li>
                     <label>
-                    Золото<input type="checkbox"><i></i>
+                    Золото<input type="checkbox" value="GoldPer" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('Lane')">
+                  <li>
                     <label>
-                    Обзор и аксессуары<input type="checkbox"><i></i>
+                    Обзор и аксессуары<input type="checkbox" value="Lane" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
                 <ul class="list"><b>Защита</b>
-                  <li @click="changeFilter('Armor')">
+                  <li>
                     <label>
-                    Броня<input type="checkbox"><i></i>
+                    Броня<input type="checkbox" value="Armor" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('Health')">
+                  <li>
                     <label>
-                    Здоровье<input type="checkbox"><i></i>
+                    Здоровье<input type="checkbox" value="Health" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('HealthRegen')">
+                  <li>
                     <label>
-                    Восстановление здоровья<input type="checkbox"><i></i>
+                    Восстановление здоровья<input type="checkbox" value="HealthRegen" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('ManaRegen')">
+                  <li>
                     <label>
-                      Сопротивление магии<input type="checkbox"><i></i>
+                      Сопротивление магии<input type="checkbox" value="ManaRegen" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
                 <ul class="list"><b>Атака</b>
-                  <li @click="changeFilter('AttackSpeed')">
+                  <li>
                     <label>
-                    Скорость атаки<input type="checkbox"><i></i>
+                    Скорость атаки<input type="checkbox" value="AttackSpeed" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('CriticalStrike')">
+                  <li>
                     <label>
-                    Критический удар<input type="checkbox"><i></i>
+                    Критический удар<input type="checkbox" value="CriticalStrike" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('Damage')">
+                  <li>
                     <label>
-                    Урон<input type="checkbox"><i></i>
+                    Урон<input type="checkbox" value="Damage" v-model="filter"><i></i>
                     </label>
                   </li>
-                  <li @click="changeFilter('LifeSteal')">
+                  <li>
                     <label>
-                    Вампиризм<input type="checkbox"><i></i>
+                    Вампиризм<input type="checkbox" value="LifeSteal" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
                 <ul class="list"><b>Магия</b>
                   <li>
                     <label>
-                    Сокращение перезарядки<input type="checkbox"><i></i>
+                    Сокращение перезарядки<input type="checkbox" value="CooldownReduction" v-model="filter"><i></i>
                     </label>
                   </li>
                   <li>
                     <label>
-                    Мана<input type="checkbox"><i></i>
+                    Мана<input type="checkbox" value="Mana" v-model="filter"><i></i>
                     </label>
                   </li>
                   <li>
                     <label>
-                    Восстановление маны<input type="checkbox"><i></i>
+                    Восстановление маны<input type="checkbox" value="ManaRegen" v-model="filter"><i></i>
                     </label>
                   </li>
                   <li>
                     <label>
-                    Сила умений<input type="checkbox"><i></i>
+                    Сила умений<input type="checkbox" value="SpellDamage" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
                 <ul class="list"><b>Передвижение</b>
                   <li>
                     <label>
-                    Ботинки<input type="checkbox"><i></i>
+                    Ботинки<input type="checkbox" value="Boots" v-model="filter"><i></i>
                     </label>
                   </li>
                   <li>
                     <label>
-                    Другое<input type="checkbox"><i></i>
+                    Другое<input type="checkbox" value="Consumable" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>
@@ -135,164 +138,7 @@
                     <div class="name-item">
                       {{item.data.name}}
                     </div>
-                    <div class="hint">
-                      {{item.data.description}}
-                    </div>
-                  </div>
-                </div>
-                <div class="block-2-2">
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        00
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        000
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0000
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        00000
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        000000
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        1111111
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
-                  </div>
-                  <div class="icon-2">
-                    <div class="pic">
-                      <img src="" alt="pic" width="38" height="38">
-                    </div>
-                    <div class="price">
-                        0
-                    </div>
-                    <div class="icon-2-discription">Палка-убивалка троллей</div>
+                    <div class="hint" v-html="item.data.description"></div>
                   </div>
                 </div>
               </div>
@@ -336,7 +182,7 @@
     data () {
       return {
         showReccomended: false,
-        filter: ''
+        filter: []
       }
     },
     computed: {
@@ -372,7 +218,8 @@
         'removeItem'
       ]),
       ...mapActions([
-        'getItems'
+        'getItems',
+        'calculate'
       ]),
       close () {
         this.$emit('close')
@@ -383,10 +230,12 @@
       addItemToChampion (item) {
         this.buyItem({ value: item, side: this.side })
         this.addItem({ item, side: this.side })
+        this.calculate()
       },
       removeItemFromChampion (item) {
         this.sellItem({ value: item, side: this.side })
         this.removeItem({ item, side: this.side })
+        this.calculate()
       }
     }
   }

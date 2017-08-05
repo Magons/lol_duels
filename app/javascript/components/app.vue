@@ -5,7 +5,7 @@
         <div class="header__logo">
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
         </div>
-        <div class="header__user-block">
+        <div class="header__user-block" v-if="false">
           <button class="header__user-btn" type="button">LogIn</button>
           <button class="header__user-btn" type="button">Registration</button>
         </div>
