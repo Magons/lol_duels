@@ -145,27 +145,51 @@
     <itemStore :show="showItemStore" @close="showItemStore = false" :side="side"/>
 
     <Popup v-if="showLoginModal" @close="showLoginModal = false">
-      <p>Log In</p>
-      <form action="/users/sign_in" method="post">
+      <!-- <p>Log In</p> -->
+      <!-- <form action="/users/sign_in" method="post">
         <label>Email</label>
         <input type="email" name="user[email]">
         <label>Password</label>
         <input type="password" name="user[password]">
         <button type="submit">Log In</button>
         <button @click="showLoginModal = false">Cancel</button>
+      </form> -->
+      <form action="/users/sign_in" method="post">
+        <h2>Sign In</h2>
+        <p>
+          <label for="Email" class="floatLabel">Email</label>
+          <input id="Email" name="Email" type="text">
+        </p>
+        <p>
+          <label for="password" class="floatLabel">Password</label>
+          <input id="password" name="password" type="password">
+          <span v-if="false">Enter a password longer than 8 characters</span>
+        </p>
+        <p>
+          <input type="submit" value="Log In" id="submit">
+        </p>
       </form>
     </Popup>
     <Popup v-if="showRegistrationModal" @close="showRegistrationModal = false">
-      <p>Registration</p>
       <form action="/users" method="post">
-        <label>Email</label>
-        <input type="email" name="user[email]">
-        <label>Password</label>
-        <input type="password" name="user[password]">
-        <label>Password Confirmation</label>
-        <input type="password" name="user[password_confirmation]">
-        <button type="submit">Sign Up</button>
-        <button @click="showRegistrationModal = false">Cancel</button>
+        <h2>Sign Up</h2>
+        <p>
+          <label for="Email" class="floatLabel">Email</label>
+          <input id="Email" name="user[email]" type="text">
+        </p>
+        <p>
+          <label for="password" class="floatLabel">Password</label>
+          <input id="password" name="user[password]" type="password">
+          <span v-if="false">Enter a password longer than 8 characters</span>
+        </p>
+        <p>
+          <label for="confirm_password" class="floatLabel">Confirm Password</label>
+          <input id="confirm_password" name="user[password_confirmation]" type="password">
+          <span v-if="false">Your passwords do not match</span>
+        </p>
+        <p>
+          <input type="submit" value="Create My Account" id="submit">
+        </p>
       </form>
     </Popup>
   </div>
