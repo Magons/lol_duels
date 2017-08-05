@@ -12,7 +12,6 @@
           <div class="wrapper">
             <div class="wrap-all-items">
               <div class="block-1">
-                {{filter}}
                 <p>All items</p>
                 <ul class="list"><b>Начальные предметы</b>
                   <li>
@@ -139,9 +138,7 @@
                     <div class="name-item">
                       {{item.data.name}}
                     </div>
-                    <div class="hint">
-                      {{item.data.description}}
-                    </div>
+                    <div class="hint" v-html="item.data.description"></div>
                   </div>
                 </div>
               </div>
@@ -221,7 +218,8 @@
         'removeItem'
       ]),
       ...mapActions([
-        'getItems'
+        'getItems',
+        'calculate'
       ]),
       close () {
         this.$emit('close')
@@ -232,10 +230,12 @@
       addItemToChampion (item) {
         this.buyItem({ value: item, side: this.side })
         this.addItem({ item, side: this.side })
+        this.calculate()
       },
       removeItemFromChampion (item) {
         this.sellItem({ value: item, side: this.side })
         this.removeItem({ item, side: this.side })
+        this.calculate()
       }
     }
   }

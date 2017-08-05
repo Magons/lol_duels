@@ -367,6 +367,10 @@ const actions = {
     context.commit('setMovenmentSpeed', { side, stats, level })
     context.commit('setAttackSpeed', { side, stats, level })
     context.commit('setMagicResist', { side, stats, level })
+    const sideFirstCharUp = side.charAt(0).toUpperCase() + side.slice(1)
+    context.rootState.Items[`purchased${sideFirstCharUp}Items`].forEach((item) => {
+      context.commit('addItem', { item, side: payload.side })
+    })
   }
 }
 
