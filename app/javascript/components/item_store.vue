@@ -135,6 +135,9 @@
                     <div class="name-item">
                       {{item.data.name}}
                     </div>
+                    <div class="hint">
+                      {{item.data.description}}
+                    </div>
                   </div>
                 </div>
                 <div class="block-2-2">
@@ -393,8 +396,40 @@
   @import './css/style.scss';
 
   .name-item {
-    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    height: 45px;
     font-size: 12px;
     color: #fff;
+    cursor: pointer;
+  }
+  .hint {
+    position: absolute;
+    top: 41px;
+    left: 22px;
+    display: none;
+    width: 135px;
+    height: auto;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #e5c46c;
+    word-wrap: break-word;
+    background-color: #162a27;
+    border: 2px solid #73602d;
+    border-radius: 5px;
+    z-index: 32;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: #162a27;
+      border-left: 2px solid #73602d;
+      border-top: 2px solid #73602d;
+      transform: rotate(45deg);
+      top: -7px;
+      left: 72px;
+    }
   }
 </style>
