@@ -1,6 +1,6 @@
 <template>
   <div id='app'>
-    <header class="header">
+    <header class="header" v-if="false">
       <div class="header__container">
         <div class="header__logo">
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
@@ -127,7 +127,7 @@
       </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" v-if="false">
       <div class="footer__container">
         <div class="footer__logo">
           <img src="./img/header-logo.jpg" alt="League of Legends" width="310" height="123" class="header__logo-img">
