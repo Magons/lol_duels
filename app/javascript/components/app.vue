@@ -49,7 +49,7 @@
 
         <section class="center">
 
-          <h1 class="center__header">Probability of winning</h1>
+          <h1 class="center__header"  v-if="false">Probability of winning</h1>
           <BarChart :value="chanceRight"/>
           <div class="center__ratio">
             <div class="center__ratio-left">

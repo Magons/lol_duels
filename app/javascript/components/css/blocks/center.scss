@@ -3,7 +3,7 @@
 	vertical-align: top;
 	width: 555px;
 	margin-right: 30px;
-	padding-top: 20px;
+	padding-top: 64px;
 }
 
 .center__header {
@@ -81,8 +81,9 @@
 }
 
 .center__hero-pic {
-	width: 204px;
-	height: 371px;
+	width: 170px;
+	height: 310px;
+	margin: 0 auto;
 	margin-bottom: 63px;
 	border: 3px solid #847943;
 	border-radius: 6px;
@@ -92,8 +93,6 @@
    box-shadow: inset 2px 2px 41px 10px rgba(0,0,0,0.75);
    overflow: hidden;
    z-index: 1;
-
-
 }
 
 .center__hero-name {
