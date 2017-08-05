@@ -202,7 +202,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
 
 .wrapper{
   width: 685px;
-  height: 483px;  
+  height: 483px;
   position: relative;
   margin-bottom: 18px;
   background-color: #0f1616;
@@ -352,6 +352,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
   overflow: auto;
 }
 .block-2 .row{
+  display: flex;
   width: 160px;
   height: 60px;
   margin-left: 5px;

@@ -10,108 +10,7 @@
             <button type="button" class="btn-list" title="Списком"></button>
           </div>
           <div class="wrapper">
-            <div class="wrap-reccomended" v-if="showReccomended">
-              <div class="row-3">
-              <p>Начальные предметы</p>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-              </div>
-              <div class="row-3">
-              <p>Начальные предметы</p>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает , когда неподалеку когда неподалекукогда неподалекукогда когда неподалекукогда неподалекукогда неподалеку неподалекукогда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-              </div>
-              <div class="row-3">
-              <p>Начальные предметы</p>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-                <div class="icon-3">
-                  <div class="left-pic">
-                    <img src="" alt="" width="38" height="38">
-                    <p>0</p>
-                  </div>
-                  <div class="right-dis">
-                    <p>Древняя монета</p>
-                    <span>Дает золото, когда неподалеку кто-то другой убивает вражеского миньйона</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="wrap-all-items" v-else>
+            <div class="wrap-all-items">
               <div class="block-1">
                 <p>Все предметы</p>
                 <ul class="list"><b>Начальные предметы</b>
@@ -229,11 +128,12 @@
                       <div class="pic">
                         <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" alt="pic" width="38" height="38">
                       </div>
-                      <!-- description -->
-                      <!-- {{item.data.description}} -->
                       <div class="price">
                         {{item.data.gold.base}}
                       </div>
+                    </div>
+                    <div class="name-item">
+                      {{item.data.name}}
                     </div>
                   </div>
                 </div>
@@ -396,26 +296,26 @@
             </div>
           </div>
             <div class="block-3">
-            <div class="left">
-              <div class="pic" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
-                <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+              <div class="left">
+                <div class="pic" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                </div>
+                <div class="pic" v-for="item in emptySlots">
+                  <img src="" alt="pic" width="38" height="38">
+                </div>
               </div>
-              <div class="pic" v-for="item in emptySlots">
-                <img src="" alt="pic" width="38" height="38">
+              <div class="middle">
+                <div class="pic">
+                  <img src="" alt="pic" width="38" height="38">
+                </div>
               </div>
-            </div>
-            <div class="middle">
-              <div class="pic">
-                <img src="" alt="pic" width="38" height="38">
+              <div class="right">
+                <button class="btn">ПРОДАТЬ</button>
+                <button class="btn">ВЕРНУТЬ</button>
               </div>
-            </div>
-            <div class="right">
-              <button class="btn">ПРОДАТЬ</button>
-              <button class="btn">ВЕРНУТЬ</button>
-            </div>
             </div>
         </div>
-        
+
       </div>
     </div>
     <div class="store__overlay"></div>
@@ -491,4 +391,10 @@
 
 <style lang="scss" scoped>
   @import './css/style.scss';
+
+  .name-item {
+    padding-top: 5px;
+    font-size: 12px;
+    color: #fff;
+  }
 </style>
