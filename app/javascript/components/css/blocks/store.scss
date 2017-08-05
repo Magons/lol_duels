@@ -6,7 +6,7 @@
   height: auto;
   background-color: #142020;
   border: 4px solid #73602d;
-  z-index: 3;
+  z-index: 30;
 }
 .container-close{
   position: absolute;
@@ -705,4 +705,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
   height: 207px;
   overflow: auto;
   padding-left: 7px;
+}
+.store__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 25;
 }
