@@ -2,12 +2,15 @@
 	display: block;
 	position: absolute;
 	z-index: 30;
-	top: 480px;
-	left: calc(50% - 496px);
-  width: 992px;
-  height: 875px;
+	top: calc(50% - 245px);
+	left: calc(50% - 472px);
+  width: 944px;
+  height: 490px;
   background: url(./img/modal-champion-bg.png) center top no-repeat;
+  background-position: -16px -13px;
   background-color: transparent;
+  border: 9px double #b28a4e;
+  border-radius: 20px;
 }
 
 .moodal-champion__header {
@@ -16,8 +19,8 @@
 	font-size: 36px;
 	font-weight: 400;
 	color: #ffffff;
-	margin-top: 53px;
-	margin-bottom: 41px;
+	margin-top: 30px;
+	margin-bottom: 25px;
 }
 
 .modal-champion__search {
@@ -51,10 +54,10 @@
 
 .modal-champion__item-list {
 	margin: 0;
-	margin-left: 104px;
+	margin-left: 70px;
 	padding: 0;
 	width: 850px;
-	height: 590px;
+	height: 280px;
 	font-size: 0;
 	overflow: auto;
 }
@@ -63,15 +66,21 @@
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
   border: 3px solid #ddd0a9;
   border-radius: 13px;
-  margin-right: 38px;
+  margin-right: 33px;
   margin-bottom: 28px;
   background: url(./img/champion-icon.png) center top no-repeat;
+  background-size: auto auto;
   cursor: pointer;
   overflow: hidden;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
 
   &:hover {
     border-color: #c8a35b;

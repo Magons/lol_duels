@@ -1,6 +1,6 @@
 .container{
   position: absolute;
-  top: 550px;
+  top: calc(50% - 307px);
   left: calc(50% - 364px);
   width: 728px;
   height: auto;
@@ -72,7 +72,7 @@
 }
 .content{
   width: auto;
-  height: 640px;
+  height: 610px;
   border: 2px solid #73602d;
   font-size: 0;
 }
@@ -126,7 +126,7 @@
 }
 .block-1{
   width: 185px;
-  height: 483px;
+  height: 455px;
   display: inline-block;
   margin-right: 6px;
   vertical-align: top;
@@ -202,9 +202,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
 
 .wrapper{
   width: 685px;
-  height: 483px;
-  position: relative;
-  margin-bottom: 18px;
+  height: 455px;
+  position: relative;  
   background-color: #0f1616;
 }
 .wrap-reccomended{
@@ -294,7 +293,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
 }
 .wrap-all-items{
   visibility: visible;
-  height: 483px;
+  height: 455px;
   width: 701px;
   position: absolute;
   background-color: #182224;
@@ -318,7 +317,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
 }
 .block-view{
   width: 510px;
-  height: 483px;
+  height: 455px;
   border-radius: 4px;
   display: inline-block;
   vertical-align: top;
@@ -330,7 +329,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
   display: flex;
   flex-wrap: wrap;
   width: 510px;
-  height: 477px;
+  height: 438px;
   border-radius: 4px;
   padding-top: 6px;
   overflow: auto;
@@ -468,6 +467,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
 .block-3{
   width: 378px;
   height: 83px;
+  padding-top: 20px;
   position: relative;
 }
 .block-3::before{
@@ -476,7 +476,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#173e3d', end
   width: 701px;
   background-color: #072f2b;
   position: absolute;
-  top: -9px;
+  top: 9px;
 }
 .block-3::after{
   content: "";
