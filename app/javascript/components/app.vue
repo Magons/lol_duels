@@ -21,7 +21,10 @@
           <select v-model="leftLvl" class="sidebar__select">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
-          <h2 class="sidebar__characteristics">Stats:</h2>
+          <h2 class="sidebar__characteristics">
+            <span class="expand-stats" @click="changeExpandStats('Left')">?</span>
+            Stats:
+          </h2>
           <ul class="sidebar__parameter-list">
             <li class="sidebar__parameter" v-for="stat in stats" v-if="stat.show">
               <p class="sidebar__param-title">{{stat.name}}:</p>
@@ -97,7 +100,10 @@
           <select v-model="rightLvl"  class="sidebar__select  sidebar__select--right">
             <option v-for="level in 18" :value="level">{{level}}</option>
           </select>
-          <h2 class="sidebar__characteristics">Stats:</h2>
+          <h2 class="sidebar__characteristics">
+            <span class="expand-stats" @click="changeExpandStats('Right')">?</span>
+            Stats:
+          </h2>
           <ul class="sidebar__parameter-list">
             <li class="sidebar__parameter" v-for="stat in stats" v-if="stat.show">
               <p class="sidebar__param-title">{{stat.name}}:</p>
@@ -143,6 +149,8 @@
     <runes :show="showRunes" @close="showRunes = false" :side="side"/>
 
     <itemStore :show="showItemStore" @close="showItemStore = false" :side="side"/>
+
+    <expandStats :show="showExpandStats" @close="showExpandStats = false" :side="side"/>
   </div>
 </template>
 
@@ -154,23 +162,16 @@
   import runes from './runes'
   import champions from './champions'
   import itemStore from './item_store'
+  import expandStats from './expand_stats'
 
   export default {
-    watch: {
-      stats () {
-        this.calculate()
-      }
-    },
-    created () {
-      this.$store.dispatch('calculateStats', { side: 'right' })
-      this.$store.dispatch('calculateStats', { side: 'left' })
-    },
     data: function () {
       return {
         showRunes: false,
         showTalants: false,
         showItemStore: false,
         showChampions: false,
+        showExpandStats: false,
         side: 'Left'
       }
     },
@@ -215,7 +216,8 @@
       champions,
       itemStore,
       AnimatedNumber,
-      BarChart
+      BarChart,
+      expandStats
     },
     methods: {
       ...mapActions([
@@ -241,17 +243,24 @@
         this.side = side
         this.showItemStore = !this.showItemStore
       },
+      changeExpandStats (side) {
+        this.side = side
+        this.showExpandStats = !this.showItemStore
+      },
       keyCodeListener (e) {
         if (e.keyCode === 27) {
           this.showRunes = false
           this.showTalants = false
           this.showItemStore = false
           this.showChampions = false
+          this.showExpandStats = false
         }
       }
     },
     created () {
       document.addEventListener('keydown', this.keyCodeListener)
+      this.$store.dispatch('calculateStats', { side: 'right' })
+      this.$store.dispatch('calculateStats', { side: 'left' })
     },
     beforeDestroy () {
       document.removeEventListener('keydown', this.keyCodeListener)
@@ -261,4 +270,10 @@
 
 <style lang="scss" scoped>
   @import './css/style.scss';
+
+  .expand-stats {
+    cursor: pointer;
+    font-weight: bold;
+    color: #e5c46c;
+  }
 </style>
