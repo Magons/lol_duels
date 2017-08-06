@@ -119,7 +119,7 @@
                   </li>
                   <li>
                     <label>
-                    Другое<input type="checkbox" value="Consumable" v-model="filter"><i></i>
+                    Другое<input type="checkbox" value="NonbootsMovement" v-model="filter"><i></i>
                     </label>
                   </li>
                 </ul>

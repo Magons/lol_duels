@@ -3,14 +3,16 @@
     <div class="modal-champion">
       <button class="close-btn" @click="close()">Close</button>
       <h1 class="moodal-champion__header">Expand Stats</h1>
-      <ul class="">
-        <li class="" v-for="stat in stats">
-          <span class="sidebar__param-title">{{stat.name}}: </span>
-          <span class="sidebar__param-val">
-            {{stat[side.toLowerCase()]}}
-          </span>
-        </li>
-      </ul>
+      <div class="column-2">
+        <ul class="">
+          <li class="" v-for="stat in stats">
+            <span class="sidebar__param-title">{{stat.name}}: </span>
+            <span class="sidebar__param-val">
+              {{stat[side.toLowerCase()]}}
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="modal-champion__overlay"></div>
   </div>
@@ -20,6 +22,9 @@
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
+    created () {
+      debugger
+    },
     props: ['show', 'side'],
     data () {
       return {
@@ -59,4 +64,10 @@
 
 <style lang="scss" scoped>
   @import './css/style.scss';
+
+  .column-2 {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
 </style>

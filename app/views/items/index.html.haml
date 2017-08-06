@@ -1,8 +1,56 @@
 %h1 Items
-- @items.each do |item|
-  %p= item.name
-  / %pre= item.data
-  - item.data.each do |key, value|
-    %p
-      %b= key + ': '
-      %span= value
+%table
+  %tr
+    %th image
+    %th Name
+    %th Description
+    / %th Colloq
+    / %th Plaintext
+    / %th Into
+    / %th gold
+    %th tags
+    / %th maps
+    %th stats
+  - @items.each do |item|
+    %tr
+      %td= image_tag("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.data['image']['full']}")
+      %td= item.data['name']
+      %td= item.data['description'].html_safe
+      / %td= item.data['colloq']
+      / %td= item.data['plaintext']
+      / %td= item.data['into']
+      / %td= item.data['gold']
+      %td= item.data['tags']
+      / %td= item.data['maps']
+      %td= item.data['stats']
+      / - item.data.each do |key, value|
+      /   %td= value
+
+/ - @items.each do |item|
+/   %p= item.name
+/   / %pre= item.data
+/   - item.data.each do |key, value|
+/     %p
+/       %b= key + ': '
+/       %span= value
+
+
+/ name:
+
+/ description:
+
+/ colloq:
+
+/ plaintext:
+
+/ into:
+
+/ image:
+
+/ gold:
+
+/ tags: ["Boots"]
+
+/ maps:
+
+/ stats:
