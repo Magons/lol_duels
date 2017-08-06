@@ -240,7 +240,21 @@
       changeItems (side) {
         this.side = side
         this.showItemStore = !this.showItemStore
+      },
+      keyCodeListener (e) {
+        if (e.keyCode === 27) {
+          this.showRunes = false
+          this.showTalants = false
+          this.showItemStore = false
+          this.showChampions = false
+        }
       }
+    },
+    created () {
+      document.addEventListener('keydown', this.keyCodeListener)
+    },
+    beforeDestroy () {
+      document.removeEventListener('keydown', this.keyCodeListener)
     }
   }
 </script>
