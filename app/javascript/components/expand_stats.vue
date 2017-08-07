@@ -22,9 +22,6 @@
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
-    created () {
-      debugger
-    },
     props: ['show', 'side'],
     data () {
       return {

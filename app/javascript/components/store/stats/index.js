@@ -328,7 +328,13 @@ const mutations = {
       } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
 
       } else if (key.match(/^Percent([A-z]+)Mod$/)) {
+        const item = key.match(/^Percent([A-z]+)Mod$/)[1]
+        debugger
+        if (item === 'AttackSpeed') {
 
+        } else {
+          state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
+        }
       } else if (key.match(/^Flat([A-z]+)Mod$/)) {
         const item = key.match(/^Flat([A-z]+)Mod$/)[1]
         state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
@@ -344,7 +350,12 @@ const mutations = {
       } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
 
       } else if (key.match(/^Percent([A-z]+)Mod$/)) {
+        const item = key.match(/^Percent([A-z]+)Mod$/)[1]
+        if (item === 'AttackSpeed') {
 
+        } else {
+          state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] - stats[key]
+        }
       } else if (key.match(/^Flat([A-z]+)Mod$/)) {
         const item = key.match(/^Flat([A-z]+)Mod$/)[1]
         state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] - stats[key]
