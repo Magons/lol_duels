@@ -185,6 +185,12 @@ const state = {
   },
   magicResistMeleeConst: 30.85,
   magicResistRangedConst: 29.5,
+  notIncludedStats: [
+    "(\\d)+% Base (Mana Regen)",
+    "(\\d)+% Base (Health Regen)",
+    "(\\d)+% (Cooldown Reduction)",
+    "(\\d)+% Bonus (Health)"
+  ],
   itemsDto: [
     'PercentTimeDeadModPerLevel',
     'PercentArmorPenetrationModPerLevel',
@@ -322,6 +328,7 @@ const mutations = {
   },
   addItem (state, payload) {
     const stats = payload.item.data.stats
+    const side = payload.side.toLowerCase()
     for (let key in stats) {
       if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
 
@@ -329,18 +336,46 @@ const mutations = {
 
       } else if (key.match(/^Percent([A-z]+)Mod$/)) {
         const item = key.match(/^Percent([A-z]+)Mod$/)[1]
-        debugger
         if (item === 'AttackSpeed') {
 
         } else {
-          state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
+          state.stats[item][side] = state.stats[item][side] + stats[key]
         }
       } else if (key.match(/^Flat([A-z]+)Mod$/)) {
         const item = key.match(/^Flat([A-z]+)Mod$/)[1]
-        state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
+        state.stats[item][side] = state.stats[item][side] + stats[key]
       }
       console.log(`${key}: ${stats[key]}`)
     }
+    state.notIncludedStats.forEach((item) => {
+      const regex = new RegExp(item)
+      const coincidence = payload.item.data.description.match(regex)
+      if (coincidence && coincidence[2] === 'Mana Regen') {
+        let MPRegen = state.stats.MPRegeneration[side]
+        if (MPRegen === 0) {
+          state.stats.MPRegeneration[side] = coincidence[1] * 1
+        } else {
+          state.stats.MPRegeneration[side] = coincidence[1] * MPRegen
+        }
+      } else if (coincidence && coincidence[2] === 'Health Regen') {
+        let HPRegen = state.stats.HPRegen[side]
+        if (HPRegen === 0) {
+          state.stats.HPRegen[side] = coincidence[1] * 1
+        } else {
+          state.stats.HPRegen[side] = coincidence[1] * HPRegen
+        }
+      } else if (coincidence && coincidence[2] === 'Cooldown Reduction') {
+        let Cooldown = state.stats.Cooldown[side]
+        if (Cooldown === 0) {
+          state.stats.Cooldown[side] = coincidence[1] / 100
+        } else {
+          state.stats.Cooldown[side] = coincidence[1] / 100 + Cooldown
+        }
+      } else if (coincidence && coincidence[2] === 'Health') {
+        let HPPool = state.stats.HPPool[side]
+        HPPool = HPPool * coincidence[1]
+      }
+    })
   },
   removeItem (state, payload) {
     const stats = payload.item.data.stats
