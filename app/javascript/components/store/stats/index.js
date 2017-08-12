@@ -68,6 +68,12 @@ const state = {
       left: 0,
       right: 0
     },
+    BasePhysicalDamage: {
+      show: false,
+      name: 'Base Attack Damage',
+      left: 0,
+      right: 0
+    },
     Armor: {
       show: true,
       name: 'Armor',
@@ -288,9 +294,11 @@ const mutations = {
   setPhysicalDamage (state, payload) {
     if (payload.level === 1) {
       state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage
+      state.stats.BasePhysicalDamage[payload.side] = payload.stats.attackdamage
     } else {
       const additionalAttackDamage = payload.stats.attackdamageperlevel * payload.level -
         payload.stats.attackdamageperlevel
+      state.stats.BasePhysicalDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
       state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
     }
   },
