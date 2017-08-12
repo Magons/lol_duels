@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+npm install - install dependencies
+rake db:create - creates db tables
+rake db:migrate 
+foreman start - starting server
+rake load_data:all - loads data
+
+server is running in http://localhost:5000/

@@ -46,4 +46,5 @@ class Fighter
                               2 - (100 / (100 - @armor))
                             end
   end
+
 end
