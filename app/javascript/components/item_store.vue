@@ -219,7 +219,8 @@
       ]),
       ...mapActions([
         'getItems',
-        'calculate'
+        'calculate',
+        'calculateStats'
       ]),
       close () {
         this.$emit('close')
@@ -234,7 +235,7 @@
       },
       removeItemFromChampion (item) {
         this.sellItem({ value: item, side: this.side })
-        this.removeItem({ item, side: this.side })
+        this.calculateStats({ item, side: this.side })
         this.calculate()
       }
     }

@@ -34,7 +34,13 @@ const state = {
     },
     MPRegeneration: {
       show: true,
-      name: 'Resource Regeneration',
+      name: 'Mana Regeneration',
+      left: 0,
+      right: 0
+    },
+    BaseManaRegen: {
+      show: false,
+      name: 'Base Mana Regen',
       left: 0,
       right: 0
     },
@@ -317,6 +323,17 @@ const mutations = {
       state.stats.BaseHPRegen[payload.side] = payload.stats.hpregen + additionalHpRegen
     }
   },
+  setMPRegen (state, payload) {
+    if (payload.level === 1) {
+      state.stats.MPRegeneration[payload.side] = payload.stats.mpregen
+      state.stats.BaseManaRegen[payload.side] = payload.stats.mpregen
+    } else {
+      const additionalMPRegen = payload.stats.mpregenperlevel * payload.level -
+        payload.stats.mpregenperlevel
+      state.stats.MPRegeneration[payload.side] = payload.stats.mpregen + additionalMPRegen
+      state.stats.BaseManaRegen[payload.side] = payload.stats.mpregen + additionalMPRegen
+    }
+  },
   setMovenmentSpeed (state, payload) {
     state.stats.MovementSpeed[payload.side] = payload.stats.movespeed
   },
@@ -333,6 +350,11 @@ const mutations = {
   setMagicResist (state, payload) {
     // Here we should define champion type (ranged/melee)
     state.stats.SpellBlock[payload.side] = state.magicResistMeleeConst + (1.25 * payload.level)
+  },
+  setAllStatsToZero (state, payload) {
+    Object.keys(state.stats).forEach((item) => {
+      state.stats[item][payload.side] = 0
+    })
   },
   addItem (state, payload) {
     const stats = payload.item.data.stats
@@ -359,11 +381,12 @@ const mutations = {
       const regex = new RegExp(item)
       const coincidence = payload.item.data.description.match(regex)
       if (coincidence && coincidence[2] === 'Mana Regen') {
-        let MPRegen = state.stats.MPRegeneration[side]
-        if (MPRegen === 0) {
-          state.stats.MPRegeneration[side] = coincidence[1] * 1
+        let BaseMPRegen = state.stats.BaseManaRegen[side]
+        if (BaseMPRegen === 0) {
+          state.stats.MPRegeneration[side] = (coincidence[1] * 1) / 100 + BaseHPRegen
         } else {
-          state.stats.MPRegeneration[side] = coincidence[1] * MPRegen
+          const additionalMPRegen = state.stats.MPRegeneration[side] - BaseMPRegen
+          state.stats.MPRegeneration[side] = (coincidence[1] * BaseMPRegen) / 100 + BaseMPRegen + additionalMPRegen
         }
       } else if (coincidence && coincidence[2] === 'Health Regen') {
         let BaseHPRegen = state.stats.BaseHPRegen[side]
@@ -373,64 +396,9 @@ const mutations = {
           const additionalHpRegen = state.stats.HPRegen[side] - BaseHPRegen
           state.stats.HPRegen[side] = (coincidence[1] * BaseHPRegen) / 100 + BaseHPRegen + additionalHpRegen
         }
-      } else if (coincidence && coincidence[2] === 'Cooldown Reduction') {
+      } else if (coincidence && coincidence[2] === 'Cooldown Reduction' && state.stats.Cooldown[side] < 0.4) {
         let Cooldown = state.stats.Cooldown[side]
-        if (Cooldown === 0) {
-          state.stats.Cooldown[side] = coincidence[1] / 100
-        } else {
-          state.stats.Cooldown[side] = coincidence[1] / 100 + Cooldown
-        }
-      } else if (coincidence && coincidence[2] === 'Health') {
-        let HPPool = state.stats.HPPool[side]
-        HPPool = HPPool * coincidence[1]
-      }
-    })
-  },
-  removeItem (state, payload) {
-    const stats = payload.item.data.stats
-    const side = payload.side.toLowerCase()
-    for (let key in stats) {
-      if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
-
-      } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
-
-      } else if (key.match(/^Percent([A-z]+)Mod$/)) {
-        const item = key.match(/^Percent([A-z]+)Mod$/)[1]
-        if (item === 'AttackSpeed') {
-
-        } else {
-          state.stats[item][side] = state.stats[item][side] - stats[key]
-        }
-      } else if (key.match(/^Flat([A-z]+)Mod$/)) {
-        const item = key.match(/^Flat([A-z]+)Mod$/)[1]
-        state.stats[item][side] = state.stats[item][side] - stats[key]
-      }
-      console.log(`${key}: ${stats[key]}`)
-    }
-    state.notIncludedStats.forEach((item) => {
-      const regex = new RegExp(item)
-      const coincidence = payload.item.data.description.match(regex)
-      if (coincidence && coincidence[2] === 'Mana Regen') {
-        let MPRegen = state.stats.MPRegeneration[side]
-        if (MPRegen === 0) {
-          state.stats.MPRegeneration[side] = coincidence[1] * 1
-        } else {
-          state.stats.MPRegeneration[side] = coincidence[1] * MPRegen
-        }
-      } else if (coincidence && coincidence[2] === 'Health Regen') {
-        let BaseHPRegen = state.stats.BaseHPRegen[side]
-        if (BaseHPRegen === 0) {
-          state.stats.HPRegen[side] = (coincidence[1] * 1) / 100 + BaseHPRegen
-        } else {
-          state.stats.HPRegen[side] = state.stats.HPRegen[side] - (coincidence[1] * BaseHPRegen / 100 )
-        }
-      } else if (coincidence && coincidence[2] === 'Cooldown Reduction') {
-        let Cooldown = state.stats.Cooldown[side]
-        if (Cooldown === 0) {
-          state.stats.Cooldown[side] = coincidence[1] / 100
-        } else {
-          state.stats.Cooldown[side] = coincidence[1] / 100 + Cooldown
-        }
+        state.stats.Cooldown[side] = coincidence[1] / 100 + Cooldown
       } else if (coincidence && coincidence[2] === 'Health') {
         let HPPool = state.stats.HPPool[side]
         HPPool = HPPool * coincidence[1]
@@ -444,11 +412,13 @@ const actions = {
     const side = payload.side.toLowerCase()
     const stats = context.rootGetters[`${side}Champion`].stats
     const level = context.rootGetters[`${side}Level`]
+    context.commit('setAllStatsToZero', { side })
     context.commit('setHelth', { side, stats, level })
     context.commit('setPhysicalDamage', { side, stats, level })
     context.commit('setArmor', { side, stats, level })
     context.commit('setMana', { side, stats, level })
     context.commit('setHpRegen', { side, stats, level })
+    context.commit('setMPRegen', { side, stats, level })
     context.commit('setMovenmentSpeed', { side, stats, level })
     context.commit('setAttackSpeed', { side, stats, level })
     context.commit('setMagicResist', { side, stats, level })
