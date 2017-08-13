@@ -33,17 +33,17 @@ class Fighter
     @time_dead          = stats['TimeDead'][side]
   end
 
-  def damage
-    @_damage ||= damage_multiplier * @attack_damage
+  def damage(armor)
+    @_damage ||= damage_multiplier(armor) * @attack_damage
   end
 
   private
 
-  def damage_multiplier
-    @_damage_multiplier ||= if @armor >= 0
-                              100 / (100 + @armor)
+  def damage_multiplier(armor)
+    @_damage_multiplier ||= if armor >= 0
+                              100 / (100 + armor)
                             else
-                              2 - (100 / (100 - @armor))
+                              2 - (100 / (100 - armor))
                             end
   end
 
