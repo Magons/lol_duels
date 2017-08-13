@@ -30,6 +30,8 @@ class Fighter
     @energy            = stats['Energy'][side]
     @gold_per_10       = stats['GoldPer10'][side]
     @time_dead         = stats['TimeDead'][side]
+    # damage multiplier calculate only once
+    @damage_multiplier = damage_multiplier
   end
 
   def damage
