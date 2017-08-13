@@ -23,10 +23,12 @@ Things you may want to cover:
 
 * ...
 
-npm install - install dependencies
-rake db:create - creates db tables
-rake db:migrate 
-foreman start - starting server
-rake load_data:all - loads data
+## HELP
 
-server is running in http://localhost:5000/
+* npm install - install dependencies
+* rake db:create - creates db tables
+* rake db:migrate 
+* foreman start - starting server
+* rake load_data:all - loads data
+
+* server is running in http://localhost:5000/
