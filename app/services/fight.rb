@@ -20,7 +20,7 @@ class Fight
 end
 
 
-# hello world
+# yet another fight class
 class Fight2
 
   def initialize( stats )
@@ -34,17 +34,15 @@ class Fight2
   # get damage for 1 second
   def get_damage(hero)
 
+    # attack_speed measured and displayed as attacks per second
     hero.attack_damage * hero.attack_speed
 
   end
 
   # for future method must contain description of hero and enemy
-  # Health Regeneration (also known as HP5) is a stat which determines
-  # the amount of health regenerates over a 5-second period
   def get_result_after_damage( hero , enemy , damage )
 
-    # code here
-    hero.health -= damage
+    hero.health -= damage * enemy.damage_multiplier
 
     # if hero alive return true else false
     if hero.health > 0
@@ -55,6 +53,7 @@ class Fight2
 
   end
 
+  # HP Regeneration determines the amount of health regenerates over a 5-second period
   def make_hp_regeneration( left_hero , right_hero)
     left_hero.health += left_hero.health_regen
     right_hero.health += right_hero.health_regen
@@ -75,9 +74,9 @@ class Fight2
       right_is_alive = get_result_after_damage( @batman , @superman , left_to_right_damage)
 
       if not right_is_alive
-
+        @batman.time_dead = seconds
       elsif not left_is_alive
-
+        @superman.time_dead = seconds
       end
 
       #because hp regeneration is every 5 second we make flag
