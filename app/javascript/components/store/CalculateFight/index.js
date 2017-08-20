@@ -25,7 +25,6 @@ const actions = {
       stats: context.rootGetters.stats
     })
       .then((response) => {
-        debugger
         context.commit('setChanceLeft', { value: response.data.left.percent })
         context.commit('setChanceRight', { value: response.data.right.percent })
       })

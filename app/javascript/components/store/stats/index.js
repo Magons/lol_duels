@@ -80,6 +80,18 @@ const state = {
       left: 0,
       right: 0
     },
+    BasicAttackSpeed: {
+      show: false,
+      name: 'Basic Attack Speed',
+      left: 0,
+      right: 0
+    },
+    AdditionalAttackSpeed: {
+      show: false,
+      name: 'Additional Attack Speed',
+      left: 0,
+      right: 0
+    },
     AttackSpeed: {
       show: true,
       name: 'Attack Speed',
@@ -350,9 +362,11 @@ const mutations = {
     const attackSpeedPerLevel = attackSpeed * payload.stats.attackspeedperlevel / 100
     if (payload.level === 1) {
       state.stats.AttackSpeed[payload.side] = attackSpeed
+      state.stats.BasicAttackSpeed[payload.side] = attackSpeed
     } else {
       const additionalAttackSpeed = attackSpeedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
       state.stats.AttackSpeed[payload.side] = attackSpeed + additionalAttackSpeed
+      state.stats.BasicAttackSpeed[payload.side] = attackSpeed + additionalAttackSpeed
     }
   },
   setMagicResist (state, payload) {
@@ -375,7 +389,11 @@ const mutations = {
       } else if (key.match(/^Percent([A-z]+)Mod$/)) {
         const item = key.match(/^Percent([A-z]+)Mod$/)[1]
         if (item === 'AttackSpeed') {
-
+          state.stats.AdditionalAttackSpeed[side] = state.stats.AdditionalAttackSpeed[side] + stats[key]
+          state.stats[item][side] = state.stats.BasicAttackSpeed[side] + (state.stats.BasicAttackSpeed[side] * state.stats.AdditionalAttackSpeed[side])
+          if (state.stats[item][side] >= 2.5) {
+            state.stats[item][side] = 2.5
+          }
         } else {
           state.stats[item][side] = state.stats[item][side] + stats[key]
         }
