@@ -1,6 +1,7 @@
 class Fighter
-  attr_reader :attack_speed, :armor, :attack_damage, :health, :magic_resist,
+  attr_reader :attack_speed, :armor, :attack_damage, :magic_resist,
               :health_regen, :mana, :damage
+  attr_accessor :time_left_to_basic_attack, :time_dead, :health
 
   def initialize(stats, side)
     @attack_speed       = stats['AttackSpeed'][side]
@@ -31,19 +32,25 @@ class Fighter
     @energy             = stats['Energy'][side]
     @gold_per_10        = stats['GoldPer10'][side]
     @time_dead          = stats['TimeDead'][side]
+    @time_left_to_basic_attack = 0
   end
 
-  def damage
-    @_damage ||= damage_multiplier * @attack_damage
+  def damage(armor)
+    @_damage ||= damage_multiplier(armor) * @attack_damage
+  end
+
+  def dead?
+    @health <= 0
   end
 
   private
 
-  def damage_multiplier
-    @_damage_multiplier ||= if @armor >= 0
-                              100 / (100 + @armor)
+  def damage_multiplier(armor)
+    @_damage_multiplier ||= if armor >= 0
+                              100 / (100 + armor)
                             else
-                              2 - (100 / (100 - @armor))
+                              2 - (100 / (100 - armor))
                             end
   end
+
 end
