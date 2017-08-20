@@ -13,11 +13,9 @@ const getters = {
 const mutations = {
   setChanceRight (state, payload) {
     state.chanceRight = payload.value
-    state.chanceLeft = 100 - payload.value
   },
   setChanceLeft (state, payload) {
     state.chanceLeft = payload.value
-    state.chanceRight = 100 - payload.value
   },
 }
 
@@ -27,7 +25,8 @@ const actions = {
       stats: context.rootGetters.stats
     })
       .then((response) => {
-        context.commit('setChanceLeft', { value: response.data })
+        context.commit('setChanceLeft', { value: response.data.left.percent })
+        context.commit('setChanceRight', { value: response.data.right.percent })
       })
   }
 }

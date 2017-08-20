@@ -8,6 +8,12 @@ const state = {
       left: 0,
       right: 0
     },
+    BaseHPRegen: {
+      show: false,
+      name: 'Base HP Regen',
+      left: 0,
+      right: 0
+    },
     ArmorPenetration: {
       show: true,
       name: 'Lethality | Armor Penetration',
@@ -28,7 +34,13 @@ const state = {
     },
     MPRegeneration: {
       show: true,
-      name: 'Resource Regeneration',
+      name: 'Mana Regeneration',
+      left: 0,
+      right: 0
+    },
+    BaseManaRegen: {
+      show: false,
+      name: 'Base Mana Regen',
       left: 0,
       right: 0
     },
@@ -56,9 +68,27 @@ const state = {
       left: 0,
       right: 0
     },
+    BasePhysicalDamage: {
+      show: false,
+      name: 'Base Attack Damage',
+      left: 0,
+      right: 0
+    },
     Armor: {
       show: true,
       name: 'Armor',
+      left: 0,
+      right: 0
+    },
+    BasicAttackSpeed: {
+      show: false,
+      name: 'Basic Attack Speed',
+      left: 0,
+      right: 0
+    },
+    AdditionalAttackSpeed: {
+      show: false,
+      name: 'Additional Attack Speed',
       left: 0,
       right: 0
     },
@@ -185,6 +215,12 @@ const state = {
   },
   magicResistMeleeConst: 30.85,
   magicResistRangedConst: 29.5,
+  notIncludedStats: [
+    "(\\d+)% Base (Mana Regen)",
+    "(\\d+)% Base (Health Regen)",
+    "(\\d+)% (Cooldown Reduction)",
+    "(\\d+)% Bonus (Health)"
+  ],
   itemsDto: [
     'PercentTimeDeadModPerLevel',
     'PercentArmorPenetrationModPerLevel',
@@ -270,9 +306,11 @@ const mutations = {
   setPhysicalDamage (state, payload) {
     if (payload.level === 1) {
       state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage
+      state.stats.BasePhysicalDamage[payload.side] = payload.stats.attackdamage
     } else {
       const additionalAttackDamage = payload.stats.attackdamageperlevel * payload.level -
         payload.stats.attackdamageperlevel
+      state.stats.BasePhysicalDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
       state.stats.PhysicalDamage[payload.side] = payload.stats.attackdamage + additionalAttackDamage
     }
   },
@@ -297,60 +335,101 @@ const mutations = {
   setHpRegen (state, payload) {
     if (payload.level === 1) {
       state.stats.HPRegen[payload.side] = payload.stats.hpregen
+      state.stats.BaseHPRegen[payload.side] = payload.stats.hpregen
     } else {
       const additionalHpRegen = payload.stats.hpregenperlevel * payload.level -
         payload.stats.hpregenperlevel
       state.stats.HPRegen[payload.side] = payload.stats.hpregen + additionalHpRegen
+      state.stats.BaseHPRegen[payload.side] = payload.stats.hpregen + additionalHpRegen
+    }
+  },
+  setMPRegen (state, payload) {
+    if (payload.level === 1) {
+      state.stats.MPRegeneration[payload.side] = payload.stats.mpregen
+      state.stats.BaseManaRegen[payload.side] = payload.stats.mpregen
+    } else {
+      const additionalMPRegen = payload.stats.mpregenperlevel * payload.level -
+        payload.stats.mpregenperlevel
+      state.stats.MPRegeneration[payload.side] = payload.stats.mpregen + additionalMPRegen
+      state.stats.BaseManaRegen[payload.side] = payload.stats.mpregen + additionalMPRegen
     }
   },
   setMovenmentSpeed (state, payload) {
     state.stats.MovementSpeed[payload.side] = payload.stats.movespeed
   },
   setAttackSpeed (state, payload) {
-    const attackSpped = 0.625/(1 + payload.stats.attackspeedoffset)
-    const attackSppedPerLevel = attackSpped * payload.stats.attackspeedperlevel / 100
+    const attackSpeed = 0.625/(1 + payload.stats.attackspeedoffset)
+    const attackSpeedPerLevel = attackSpeed * payload.stats.attackspeedperlevel / 100
     if (payload.level === 1) {
-      state.stats.AttackSpeed[payload.side] = attackSpped
+      state.stats.AttackSpeed[payload.side] = attackSpeed
+      state.stats.BasicAttackSpeed[payload.side] = attackSpeed
     } else {
-      const additionalAttackSpeed = attackSppedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
-      state.stats.AttackSpeed[payload.side] = attackSpped + additionalAttackSpeed
+      const additionalAttackSpeed = attackSpeedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
+      state.stats.AttackSpeed[payload.side] = attackSpeed + additionalAttackSpeed
+      state.stats.BasicAttackSpeed[payload.side] = attackSpeed + additionalAttackSpeed
     }
   },
   setMagicResist (state, payload) {
     // Here we should define champion type (ranged/melee)
     state.stats.SpellBlock[payload.side] = state.magicResistMeleeConst + (1.25 * payload.level)
   },
+  setAllStatsToZero (state, payload) {
+    Object.keys(state.stats).forEach((item) => {
+      state.stats[item][payload.side] = 0
+    })
+  },
   addItem (state, payload) {
     const stats = payload.item.data.stats
+    const side = payload.side.toLowerCase()
     for (let key in stats) {
       if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
 
       } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
 
       } else if (key.match(/^Percent([A-z]+)Mod$/)) {
-
+        const item = key.match(/^Percent([A-z]+)Mod$/)[1]
+        if (item === 'AttackSpeed') {
+          state.stats.AdditionalAttackSpeed[side] = state.stats.AdditionalAttackSpeed[side] + stats[key]
+          state.stats[item][side] = state.stats.BasicAttackSpeed[side] + (state.stats.BasicAttackSpeed[side] * state.stats.AdditionalAttackSpeed[side])
+          if (state.stats[item][side] >= 2.5) {
+            state.stats[item][side] = 2.5
+          }
+        } else {
+          state.stats[item][side] = state.stats[item][side] + stats[key]
+        }
       } else if (key.match(/^Flat([A-z]+)Mod$/)) {
         const item = key.match(/^Flat([A-z]+)Mod$/)[1]
-        state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] + stats[key]
+        state.stats[item][side] = state.stats[item][side] + stats[key]
       }
       console.log(`${key}: ${stats[key]}`)
     }
-  },
-  removeItem (state, payload) {
-    const stats = payload.item.data.stats
-    for (let key in stats) {
-      if (key.match(/^Percent([A-z]+)ModPerLevel$/)){
-
-      } else if (key.match(/^Flat([A-z]+)ModPerLevel$/)) {
-
-      } else if (key.match(/^Percent([A-z]+)Mod$/)) {
-
-      } else if (key.match(/^Flat([A-z]+)Mod$/)) {
-        const item = key.match(/^Flat([A-z]+)Mod$/)[1]
-        state.stats[item][payload.side.toLowerCase()] = state.stats[item][payload.side.toLowerCase()] - stats[key]
+    state.notIncludedStats.forEach((item) => {
+      const regex = new RegExp(item)
+      const coincidence = payload.item.data.description.match(regex)
+      if (coincidence && coincidence[2] === 'Mana Regen') {
+        let BaseMPRegen = state.stats.BaseManaRegen[side]
+        if (BaseMPRegen === 0) {
+          state.stats.MPRegeneration[side] = (coincidence[1] * 1) / 100 + BaseHPRegen
+        } else {
+          const additionalMPRegen = state.stats.MPRegeneration[side] - BaseMPRegen
+          state.stats.MPRegeneration[side] = (coincidence[1] * BaseMPRegen) / 100 + BaseMPRegen + additionalMPRegen
+        }
+      } else if (coincidence && coincidence[2] === 'Health Regen') {
+        let BaseHPRegen = state.stats.BaseHPRegen[side]
+        if (BaseHPRegen === 0) {
+          state.stats.HPRegen[side] = (coincidence[1] * 1) / 100 + BaseHPRegen
+        } else {
+          const additionalHpRegen = state.stats.HPRegen[side] - BaseHPRegen
+          state.stats.HPRegen[side] = (coincidence[1] * BaseHPRegen) / 100 + BaseHPRegen + additionalHpRegen
+        }
+      } else if (coincidence && coincidence[2] === 'Cooldown Reduction' && state.stats.Cooldown[side] < 0.4) {
+        let Cooldown = state.stats.Cooldown[side]
+        state.stats.Cooldown[side] = coincidence[1] / 100 + Cooldown
+      } else if (coincidence && coincidence[2] === 'Health') {
+        let HPPool = state.stats.HPPool[side]
+        HPPool = HPPool * coincidence[1]
       }
-      console.log(`${key}: ${stats[key]}`)
-    }
+    })
   }
 }
 
@@ -359,11 +438,13 @@ const actions = {
     const side = payload.side.toLowerCase()
     const stats = context.rootGetters[`${side}Champion`].stats
     const level = context.rootGetters[`${side}Level`]
+    context.commit('setAllStatsToZero', { side })
     context.commit('setHelth', { side, stats, level })
     context.commit('setPhysicalDamage', { side, stats, level })
     context.commit('setArmor', { side, stats, level })
     context.commit('setMana', { side, stats, level })
     context.commit('setHpRegen', { side, stats, level })
+    context.commit('setMPRegen', { side, stats, level })
     context.commit('setMovenmentSpeed', { side, stats, level })
     context.commit('setAttackSpeed', { side, stats, level })
     context.commit('setMagicResist', { side, stats, level })
