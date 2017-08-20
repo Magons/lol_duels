@@ -37,35 +37,34 @@ class Fight
   def get_result_after_damage(hero, enemy, damage)
     hero.health -= damage * enemy.damage_multiplier
     # if hero alive return true else false
-    hero.health > 0 ? true : false
+    hero.health <= 0 ? true : false
   end
 
   # HP Regeneration determines the amount of health regenerates over a 5-second period
-  def make_hp_regeneration(left_hero, right_hero)
-    left_hero.health += left_hero.health_regen
-    right_hero.health += right_hero.health_regen
+  def make_hp_regeneration
+    @superman.health += @superman.health_regen
+    @batman.health += @batman.health_regen
   end
 
   def calculate
     seconds = 0
     # 1 iteration is 1 second
     while true
-      # superman is left, batman is right
-      left_to_right_damage = get_damage(@superman, @batman.armor)
-      right_to_left_damage = get_damage(@batman, @superman.armor)
+      superman_damage = get_damage(@superman, @batman.armor)
+      batman_damage = get_damage(@batman, @superman.armor)
 
-      left_is_alive = get_result_after_damage(@superman, @batman, right_to_left_damage)
-      right_is_alive = get_result_after_damage(@batman, @superman, left_to_right_damage)
+      superman_is_dead = get_result_after_damage(@superman, @batman, superman_damage)
+      batman_is_dead = get_result_after_damage(@batman, @superman, batman_damage)
 
-      if not right_is_alive
+      if batman_is_dead
         @batman.time_dead = seconds
-      elsif not left_is_alive
+      elsif superman_is_dead
         @superman.time_dead = seconds
       end
 
       #because hp regeneration is every 5 second we make flag
       if seconds % 5 == 0
-        make_hp_regeneration(@superman , @batman)
+        make_hp_regeneration
       end
 
       seconds += 1
