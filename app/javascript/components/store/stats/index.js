@@ -346,13 +346,13 @@ const mutations = {
     state.stats.MovementSpeed[payload.side] = payload.stats.movespeed
   },
   setAttackSpeed (state, payload) {
-    const attackSpped = 0.625/(1 + payload.stats.attackspeedoffset)
-    const attackSppedPerLevel = attackSpped * payload.stats.attackspeedperlevel / 100
+    const attackSpeed = 0.625/(1 + payload.stats.attackspeedoffset)
+    const attackSpeedPerLevel = attackSpeed * payload.stats.attackspeedperlevel / 100
     if (payload.level === 1) {
-      state.stats.AttackSpeed[payload.side] = attackSpped
+      state.stats.AttackSpeed[payload.side] = attackSpeed
     } else {
-      const additionalAttackSpeed = attackSppedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
-      state.stats.AttackSpeed[payload.side] = attackSpped + additionalAttackSpeed
+      const additionalAttackSpeed = attackSpeedPerLevel * (payload.level - 1) * (0.685 + 0.0175 * payload.level)
+      state.stats.AttackSpeed[payload.side] = attackSpeed + additionalAttackSpeed
     }
   },
   setMagicResist (state, payload) {

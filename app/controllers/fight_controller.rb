@@ -3,8 +3,8 @@ class FightController < ApplicationController
   end
 
   def calculate
-    calculate = Fight.new(fighters_params).calculate
-    render json: calculate
+    results = Fight.new(fighters_params).calculate
+    render json: results
   end
 
   def fighters_params
