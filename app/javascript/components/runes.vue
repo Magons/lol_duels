@@ -140,7 +140,7 @@
     props: ['show'],
     data: function () {
       return {
-
+        patchVersion: process.env.PATCH_VERSION
       }
     },
     methods: {

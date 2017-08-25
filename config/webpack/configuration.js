@@ -15,6 +15,7 @@ const ifHasCDN = env.ASSET_HOST !== undefined && env.NODE_ENV === 'production'
 const devServerUrl = `http://${devServer.host}:${devServer.port}/${paths.entry}/`
 const publicUrl = ifHasCDN ? `${env.ASSET_HOST}/${paths.entry}/` : `/${paths.entry}/`
 const publicPath = env.NODE_ENV !== 'production' ? devServerUrl : publicUrl
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   devServer,
@@ -22,5 +23,11 @@ module.exports = {
   paths,
   loadersDir,
   publicUrl,
-  publicPath
+  publicPath,
+  plugins: [
+    new Dotenv({
+      path: './.env', // Path to .env file (this is the default)
+      safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+    })
+  ]
 }

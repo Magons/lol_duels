@@ -1,9 +1,99 @@
+/ %h1 Champions
+/ - @champions.each do |champion|
+/   %p= champion.name
+/   / %pre= champion.data
+/   - champion.data.each do |key, value|
+/     %p
+/       %b= key + ': '
+/       %span= value
 %h1 Champions
-- @champions.each do |champion|
-  %p= champion.name
-  / %pre= champion.data
-  - champion.data.each do |key, value|
-    %p
-      %b= key + ': '
-      %span= value
+%table
+  %tr
+    %th Image
+    %th Name
+    %th Tags
+    / %th ID
+    / %th Key
+    / %th Title
+    / %th Skins
+    / lore
+    / blurb
+    / allytips
+    / enemytips
+    / partype
+    / info
+    / recommended
+    %th Stats
+    %th Spells
+    / %th Passive
+  - @champions.each do |item|
+    %tr
+      %td= image_tag("http://ddragon.leagueoflegends.com/cdn/#{ENV['PATCH_VERSION']}/img/champion/#{item.data['image']['full']}")
+      %td= item.data['name']
+      %td= item.data['tags']
+      %td= item.data['stats']
+      %td
+        %table
+          %tr
+            %th image
+            %th Name
+            %th Description
+            %th sanitizedDescription
+            %th tooltip
+            %th leveltip
+            %th resource
+            %th maxrank
+            %th cost
+            %th costType
+            %th costBurn
+            %th cooldown
+            %th cooldownBurn
+            / %th effect
+            %th effectBurn
+            %th vars
+            %th range
+            %th rangeBurn
+            %th key
+          %tr
+            %td= image_tag("http://ddragon.leagueoflegends.com/cdn/#{ENV['PATCH_VERSION']}/img/passive/#{item.data['passive']['image']['full']}")
+            %td= item.data['passive']['name']
+            %td= item.data['passive']['description']
+            %td= item.data['passive']['sanitizedDescription']
+            %td= item.data['passive']['tooltip']
+            %td= item.data['passive']['leveltip']
+            %td= item.data['passive']['resource']
+            %td= item.data['passive']['maxrank']
+            %td= item.data['passive']['cost']
+            %td= item.data['passive']['costType']
+            %td= item.data['passive']['costBurn']
+            %td= item.data['passive']['cooldown']
+            %td= item.data['passive']['cooldownBurn']
+            / %td= item.data['passive']['effect']
+            %td= item.data['passive']['effectBurn']
+            %td= item.data['passive']['vars']
+            %td= item.data['passive']['range']
+            %td= item.data['passive']['rangeBurn']
+            %td= item.data['passive']['key']
+          - item.data['spells'].each do |spell|
+            %tr
+              %td= image_tag("http://ddragon.leagueoflegends.com/cdn/#{ENV['PATCH_VERSION']}/img/spell/#{spell['image']['full']}")
+              %td= spell['name']
+              %td= spell['description']
+              %td= spell['sanitizedDescription']
+              %td= spell['tooltip']
+              %td= spell['leveltip']
+              %td= spell['resource']
+              %td= spell['maxrank']
+              %td= spell['cost']
+              %td= spell['costType']
+              %td= spell['costBurn']
+              %td= spell['cooldown']
+              %td= spell['cooldownBurn']
+              / %td= spell['effect']
+              %td= spell['effectBurn']
+              %td= spell['vars']
+              %td= spell['range']
+              %td= spell['rangeBurn']
+              %td= spell['key']
+      / %td= item.data['passive']
 

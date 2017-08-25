@@ -70,7 +70,7 @@
               </div>
               <ul class="center__hero-items">
                 <li class="center__hero-item" v-for="item in purchasedLeftItems">
-                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
                 </li>
                 <li class="center__hero-item" v-for="item in emptyLeftSlots">
                 </li>
@@ -84,7 +84,7 @@
               </div>
               <ul class="center__hero-items">
                 <li class="center__hero-item" v-for="item in purchasedRightItems">
-                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
                 </li>
                 <li class="center__hero-item" v-for="item in emptyRightSlots">
                 </li>
@@ -172,7 +172,8 @@
         showItemStore: false,
         showChampions: false,
         showExpandStats: false,
-        side: 'Left'
+        side: 'Left',
+        patchVersion: process.env.PATCH_VERSION
       }
     },
     computed: {
@@ -224,8 +225,7 @@
         'calculate'
       ]),
       championImageUrl (champion) {
-        const championName = champion.id === 'FiddleSticks' ? 'Fiddlesticks' : champion.id
-        return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${championName}_0.jpg`
+        return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`
       },
       chooseChampion (side) {
         this.side = side
