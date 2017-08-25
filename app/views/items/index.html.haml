@@ -13,9 +13,9 @@
     %th stats
   - @items.each do |item|
     %tr
-      %td= image_tag("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.data['image']['full']}")
+      %td= image_tag("http://ddragon.leagueoflegends.com/cdn/#{ENV['PATCH_VERSION']}/img/item/#{item.data['image']['full']}")
       %td= item.data['name']
-      %td= item.data['description'].html_safe
+      %td= item.data['description']&.html_safe
       / %td= item.data['colloq']
       / %td= item.data['plaintext']
       / %td= item.data['into']

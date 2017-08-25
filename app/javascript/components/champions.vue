@@ -9,7 +9,7 @@
       <ul class="modal-champion__item-list">
         <li class="modal-champion__item" v-for="champion in champions"
           @click="setChampion(champion.data)">
-          <img :src="`https://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${champion.data.image.full}`"/>
+          <img :src="`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${champion.data.image.full}`"/>
           <p class="modal-champion__hero-name">{{champion.name}}</p>
         </li>
       </ul>
@@ -28,7 +28,7 @@
     },
     data () {
       return {
-
+        patchVersion: process.env.PATCH_VERSION
       }
     },
     computed: {

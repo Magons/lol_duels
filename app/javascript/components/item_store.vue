@@ -129,7 +129,7 @@
                   <div class="row" v-for="item in filterItems(filter)" @click.stop.prevent="addItemToChampion(item)">
                     <div class="icon">
                       <div class="pic">
-                        <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" alt="pic" width="38" height="38">
+                        <img :src="`http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.data.image.full}`" alt="pic" width="38" height="38">
                       </div>
                       <div class="price">
                         {{item.data.gold.base}}
@@ -147,7 +147,7 @@
             <div class="block-3">
               <div class="left">
                 <div class="pic" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
-                  <img :src="`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
+                  <img :src="`http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
                 </div>
                 <div class="pic" v-for="item in emptySlots">
                   <img src="" alt="pic" width="38" height="38">
@@ -182,7 +182,8 @@
     data () {
       return {
         showReccomended: false,
-        filter: []
+        filter: [],
+        patchVersion: process.env.PATCH_VERSION
       }
     },
     computed: {
