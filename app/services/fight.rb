@@ -19,7 +19,11 @@ class Fight
       make_damage(@superman, batman_damage)
       make_damage(@batman, superman_damage)
 
+      # puts "Superman damage: #{superman_damage}"
+      # puts "Batman damage: #{batman_damage}"
 
+      # puts "Superman health: #{@superman.health}"
+      # puts "Batman health: #{@batman.health}"
       @batman.time_dead = seconds if @batman.dead? && @batman.time_dead == 0
 
       @superman.time_dead = seconds if @superman.dead? && @superman.time_dead == 0
@@ -77,7 +81,7 @@ class Fight
   end
 
   def percent_to_win(hero)
-    100 * hero.time_dead / (@superman.time_dead + @batman.time_dead)
+    100.0 * hero.time_dead / (@superman.time_dead + @batman.time_dead)
   end
 end
 
