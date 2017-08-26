@@ -52,15 +52,11 @@ namespace :load_data do
   task :champions, [:api_key, :locale] => :environment do |t, args|
     Champion.destroy_all
 
-    api_key = args[:api_key] || 'RGAPI-517e5bf5-a0e2-4403-b931-1c5ce5afd6d5'
-    locale = args[:locale] || 'en_US'
-
     puts 'Load champions...'
-    uri = URI.parse(
-      'https://ru.api.riotgames.com/lol/static-data/v3/champions?locale=' \
-      "#{locale}&tags=all&dataById=false&api_key=#{api_key}"
-    )
-    response = Net::HTTP.get_response(uri)
+    url = 'https://ru.api.riotgames.com/lol/static-data/v3/champions?' \
+          "tags=image&tags=passive&tags=spells&tags=stats&dataById=false"
+
+    response = load_data(url, args)
     JSON.parse(response.body)['data'].each do |item|
       Champion.create(name: item.first, data: item.last)
     end
