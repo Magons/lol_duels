@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'masteries/index'
 
-  get 'champions/index'
-
-  get 'champions/all'
+  resources :champions, only: [:index, :show] do
+    get 'all', on: :collection
+  end
 
   get 'runes/index'
 

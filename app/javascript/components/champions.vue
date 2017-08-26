@@ -8,8 +8,8 @@
       </div>
       <ul class="modal-champion__item-list">
         <li class="modal-champion__item" v-for="champion in champions"
-          @click="setChampion(champion.data)">
-          <img :src="`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${champion.data.image.full}`"/>
+          @click="setChampion({ id: champion.id, side })">
+          <img :src="`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${champion.image}`"/>
           <p class="modal-champion__hero-name">{{champion.name}}</p>
         </li>
       </ul>
@@ -48,12 +48,13 @@
     methods: {
       ...mapActions([
         'getChampions',
+        'getChampion',
         'calculate'
       ]),
-      setChampion (champion) {
-        this.$store.commit(`set${this.side}Champion`, { value: champion })
-        this.$store.dispatch('calculateStats', { side: this.side })
-        this.calculate()
+      setChampion (payload) {
+        this.getChampion(payload)
+        // this.$store.dispatch('calculateStats', { side: this.side })
+        // this.calculate()
         this.close()
       },
       close () {

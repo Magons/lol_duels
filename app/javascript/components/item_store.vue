@@ -146,10 +146,10 @@
           </div>
             <div class="block-3">
               <div class="left">
-                <div class="pic" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
+                <div class="pic" :key="item" v-for="item in purchasedItems" @click.stop="removeItemFromChampion(item)">
                   <img :src="`http://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.data.image.full}`" v-if="item.data" alt="pic" width="38" height="38">
                 </div>
-                <div class="pic" v-for="item in emptySlots">
+                <div class="pic" :key="item" v-for="item in emptySlots">
                   <img src="" alt="pic" width="38" height="38">
                 </div>
               </div>
@@ -158,10 +158,10 @@
                   <img src="" alt="pic" width="38" height="38">
                 </div>
               </div>
-              <div class="right">
+              <!-- <div class="right">
                 <button class="btn">ПРОДАТЬ</button>
                 <button class="btn">ВЕРНУТЬ</button>
-              </div>
+              </div> -->
             </div>
         </div>
 
