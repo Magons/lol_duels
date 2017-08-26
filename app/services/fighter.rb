@@ -47,9 +47,9 @@ class Fighter
 
   def damage_multiplier(armor)
     @_damage_multiplier ||= if armor >= 0
-                              100 / (100 + armor)
+                              100.0 / (100.0 + armor)
                             else
-                              2 - (100 / (100 - armor))
+                              2 - (100.0 / (100.0 - armor))
                             end
   end
 

@@ -50,6 +50,7 @@ const actions = {
   getChampion (context, payload) {
     axios.get(`/champions/${payload.id}`)
       .then((response) => {
+        debugger
         context.commit(`set${payload.side}Champion`, { value: response.data.data })
         context.dispatch('calculateStats', { side: payload.side })
         context.dispatch('calculate')
