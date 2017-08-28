@@ -1,13 +1,16 @@
 class Fight
-  def initialize(stats)
-    @superman = Fighter.new(stats.as_json,  'left')
-    @batman = Fighter.new(stats.as_json, 'right')
+  def initialize(stats, left_id, right_id)
+    @superman = Fighter.new(stats.as_json,  'left', left_id)
+    @batman = Fighter.new(stats.as_json, 'right', right_id)
   end
 
   def calculate
     seconds = 0
     # 1 iteration is 1 second
     while !(@batman.dead? && @superman.dead?) do
+      @superman.passive_ability
+      @batman.passive_ability
+
       superman_damage = get_damage(@superman, @batman.armor)
       batman_damage = get_damage(@batman, @superman.armor)
 
@@ -50,6 +53,10 @@ class Fight
   def make_hp_regeneration
     @superman.health += @superman.health_regen
     @batman.health += @batman.health_regen
+  end
+
+  def use_passive_ability(hero)
+    hero.passive_ability
   end
 
   def results

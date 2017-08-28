@@ -22,7 +22,9 @@ const mutations = {
 const actions = {
   calculate (context) {
     axios.post('/fight/calculate', {
-      stats: context.rootGetters.stats
+      stats: context.rootGetters.stats,
+      left_id: context.rootGetters.leftChampionId,
+      right_id: context.rootGetters.rightChampionId
     })
       .then((response) => {
         context.commit('setChanceLeft', { value: response.data.left.percent })

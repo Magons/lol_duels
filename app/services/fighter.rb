@@ -1,9 +1,10 @@
 class Fighter
-  attr_reader :attack_speed, :armor, :attack_damage, :magic_resist,
+  attr_reader :armor, :attack_damage, :magic_resist,
               :health_regen, :mana, :damage
   attr_accessor :time_left_to_basic_attack, :time_dead, :health
 
-  def initialize(stats, side)
+  def initialize(stats, side, id)
+    @base_attack_speed  = stats['BasicAttackSpeed'][side]
     @attack_speed       = stats['AttackSpeed'][side]
     @armor              = stats['Armor'][side]
     @attack_damage      = stats['PhysicalDamage'][side]
@@ -32,6 +33,8 @@ class Fighter
     @energy             = stats['Energy'][side]
     @gold_per_10        = stats['GoldPer10'][side]
     @time_dead          = stats['TimeDead'][side]
+    @champion_id        = id
+    @stuned             = false
     @time_left_to_basic_attack = 0
   end
 
@@ -39,11 +42,35 @@ class Fighter
     @_damage ||= damage_multiplier(armor) * @attack_damage
   end
 
+  def attack_speed
+    if passive_ability_executor.passive? && increased_stats[:attack_speed]
+      increased_stats[:attack_speed]
+    else
+      @attack_speed
+    end
+  end
+
   def dead?
     @health <= 0
   end
 
+  def passive_ability
+    passive_ability_executor
+  end
+
   private
+
+  def champion_name
+    @_champion_name ||= Champion.find(@champion_id).data['key']
+  end
+
+  def passive_ability_executor
+    @_passive_ability_executor ||= "Ability::#{champion_name}::Passive".constantize.new(self, 1)
+  end
+
+  def increased_stats
+    passive_ability_executor.increase_stats
+  end
 
   def damage_multiplier(armor)
     @_damage_multiplier ||= if armor >= 0
@@ -52,5 +79,4 @@ class Fighter
                               2 - (100.0 / (100.0 - armor))
                             end
   end
-
 end

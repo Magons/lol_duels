@@ -225,7 +225,7 @@
         'calculate'
       ]),
       championImageUrl (champion) {
-        return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.name}_0.jpg`
+        return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.key}_0.jpg`
       },
       chooseChampion (side) {
         this.side = side

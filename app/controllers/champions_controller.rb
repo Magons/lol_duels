@@ -9,6 +9,7 @@ class ChampionsController < ApplicationController
       {
         id: champion.id,
         name: champion.name,
+        key: champion.data['key'],
         image: champion.data['image']['full']
       }
     end
