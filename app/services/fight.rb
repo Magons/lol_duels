@@ -1,3 +1,5 @@
+
+
 class Fight
   def initialize(stats)
     @superman = Fighter.new(stats.as_json,  'left')
@@ -11,8 +13,11 @@ class Fight
       superman_damage = get_damage(@superman, @batman.armor)
       batman_damage = get_damage(@batman, @superman.armor)
 
-      make_damage(@superman, batman_damage)
-      make_damage(@batman, superman_damage)
+      damage_multiplier_superman = calculate_critical_damage(superman,superman_damage)
+      damage_multiplier_batman = calculate_critical_damage(batman,batman_damage)
+
+      make_damage(@superman, batman_damage * damage_multiplier_batman )
+      make_damage(@batman, superman_damage * damage_multiplier_superman )
 
       # puts "Superman damage: #{superman_damage}"
       # puts "Batman damage: #{batman_damage}"
@@ -33,6 +38,19 @@ class Fight
     results
   end
 
+  def calculate_critical_damage(hero, hero_to_enemy_damage)
+    critical_damage = hero_to_enemy_damage
+    random_number = Random.new(hero.crit_chance)
+    if random_number == hero.crit_chance
+      # if bonus_critical_damage = 100 then damage_multiplier = 1 + (0.38* 101)
+      # then damage_multiplier = 40 ???
+      damage_multiplier = 1 + (hero.crit_chance * ( 1 + critical_damage ))
+      return hero_to_enemy_damage * damage_multiplier
+    else
+      return 1
+    end
+  end
+
   private
 
   def get_damage(hero, enemy_armor)
@@ -42,7 +60,7 @@ class Fight
   end
 
   # for future method must contain description of hero and enemy
-  def make_damage(hero, damage)
+  def make_damage(hero, damage )
     hero.health -= damage
   end
 
