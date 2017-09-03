@@ -1,4 +1,4 @@
-
+require 'Random'
 
 class Fight
   def initialize(stats)
@@ -12,7 +12,7 @@ class Fight
     while !(@batman.dead? && @superman.dead?) do
       superman_damage = get_damage(@superman, @batman.armor)
       batman_damage = get_damage(@batman, @superman.armor)
-
+      # calculating damage multiplier
       damage_multiplier_superman = calculate_critical_damage(superman,superman_damage)
       damage_multiplier_batman = calculate_critical_damage(batman,batman_damage)
 
@@ -60,7 +60,7 @@ class Fight
   end
 
   # for future method must contain description of hero and enemy
-  def make_damage(hero, damage )
+  def make_damage(hero, damage)
     hero.health -= damage
   end
 
