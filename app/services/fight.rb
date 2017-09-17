@@ -1,13 +1,19 @@
 class Fight
-  def initialize(stats)
-    @superman = Fighter.new(stats.as_json,  'left')
-    @batman = Fighter.new(stats.as_json, 'right')
+  def initialize(stats, left_id, right_id, left_level, right_level)
+    @superman = Fighter.new(stats.as_json,  'left', left_id, left_level)
+    @batman = Fighter.new(stats.as_json, 'right', right_id, right_level)
   end
 
   def calculate
     seconds = 0
     # 1 iteration is 1 second
     while !(@batman.dead? && @superman.dead?) do
+      # count number of hits which fiters will make in this second
+      @batman.count_number_of_hits
+      @superman.count_number_of_hits
+
+      perform_ability
+
       superman_damage = get_damage(@superman, @batman.armor)
       batman_damage = get_damage(@batman, @superman.armor)
 
@@ -28,6 +34,8 @@ class Fight
         make_hp_regeneration
       end
 
+      @batman.increase_made_hits
+      @superman.increase_made_hits
       seconds += 1
     end
     results
@@ -35,10 +43,12 @@ class Fight
 
   private
 
+  def perform_ability
+    AbilityPerform.new(@superman, @batman).execution
+  end
+
   def get_damage(hero, enemy_armor)
-    count_of_hits = hero.attack_speed + hero.time_left_to_basic_attack
-    hero.time_left_to_basic_attack = count_of_hits - count_of_hits.to_i
-    hero.damage(enemy_armor) * count_of_hits.to_i
+    hero.damage(enemy_armor) * hero.count_of_hits
   end
 
   # for future method must contain description of hero and enemy
@@ -50,6 +60,10 @@ class Fight
   def make_hp_regeneration
     @superman.health += @superman.health_regen
     @batman.health += @batman.health_regen
+  end
+
+  def use_passive_ability(hero)
+    hero.passive_ability
   end
 
   def results

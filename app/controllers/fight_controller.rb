@@ -3,11 +3,13 @@ class FightController < ApplicationController
   end
 
   def calculate
-    results = Fight.new(fighters_params).calculate
+    results = Fight.new(
+      params[:stats],
+      params[:left_id],
+      params[:right_id],
+      params[:left_level],
+      params[:right_level]
+    ).calculate
     render json: results
-  end
-
-  def fighters_params
-    params.require(:stats).permit!
   end
 end

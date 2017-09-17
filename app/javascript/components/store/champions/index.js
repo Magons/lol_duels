@@ -5,8 +5,10 @@ const state = {
   champions: [],
   searchString: '',
   leftLevel: 18,
+  leftChampionId: '',
   leftChampion: championData,
   rightLevel: 18,
+  rightChampionId: '',
   rightChampion: championData
 }
 
@@ -20,7 +22,9 @@ const getters = {
   leftChampion: state => state.leftChampion,
   rightChampion: state => state.rightChampion,
   leftLevel: state => state.leftLevel,
-  rightLevel: state => state.rightLevel
+  rightLevel: state => state.rightLevel,
+  leftChampionId: state => state.leftChampionId,
+  rightChampionId: state => state.rightChampionId
 }
 
 const mutations = {
@@ -28,6 +32,12 @@ const mutations = {
   setSearchString (state, payload) { state.searchString = payload.value },
   setLeftChampion (state, payload) {
     state.leftChampion = payload.value
+  },
+  setLeftChampionId (state, payload) {
+    state.leftChampionId = payload.value
+  },
+  setRightChampionId (state, payload) {
+    state.rightChampionId = payload.value
   },
   setRightChampion (state, payload) {
     state.rightChampion = payload.value
@@ -45,12 +55,15 @@ const actions = {
     axios.get('/champions/all')
       .then((response) => {
         context.commit('setChampions', { value: response.data })
+        const Aatrox = response.data.find(item => item.name === 'Aatrox')
+        context.commit('setLeftChampionId', { value: Aatrox.id })
+        context.commit('setRightChampionId', { value: Aatrox.id })
       })
   },
   getChampion (context, payload) {
     axios.get(`/champions/${payload.id}`)
       .then((response) => {
-        debugger
+        context.commit(`set${payload.side}ChampionId`, { value: response.data.id })
         context.commit(`set${payload.side}Champion`, { value: response.data.data })
         context.dispatch('calculateStats', { side: payload.side })
         context.dispatch('calculate')
