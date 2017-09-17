@@ -1,8 +1,9 @@
 module Ability
   class Passive
-    def initialize(fighter, level)
+    def initialize(fighter, enemy)
       @fighter = fighter
-      @level = level
+      @enemy = enemy
+      @level = fighter.level
     end
 
     def permanent?
@@ -21,16 +22,8 @@ module Ability
       0
     end
 
-    def increase_stats
-      {}
-    end
-
-    def decrease_enemy_stats
-      {}
-    end
-
-    def active_effect
-      nil
+    def perform(time = 0)
+      # raise 'Method not implemented'
     end
   end
 end

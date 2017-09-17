@@ -6,7 +6,9 @@ class FightController < ApplicationController
     results = Fight.new(
       params[:stats],
       params[:left_id],
-      params[:right_id]
+      params[:right_id],
+      params[:left_level],
+      params[:right_level]
     ).calculate
     render json: results
   end

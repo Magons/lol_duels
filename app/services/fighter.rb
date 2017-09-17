@@ -1,9 +1,11 @@
 class Fighter
-  attr_reader :armor, :attack_damage, :magic_resist,
-              :health_regen, :mana, :damage
-  attr_accessor :time_left_to_basic_attack, :time_dead, :health
+  attr_reader   :armor, :magic_resist,
+                :health_regen, :mana, :damage, :level, :side,
+                :base_attack_speed, :count_of_made_hits, :stats
+  attr_accessor :time_left_to_ba, :time_dead, :health, :count_of_hits, :energy,
+                :attack_speed, :attack_damage
 
-  def initialize(stats, side, id)
+  def initialize(stats, side, id, level)
     @base_attack_speed  = stats['BasicAttackSpeed'][side]
     @attack_speed       = stats['AttackSpeed'][side]
     @armor              = stats['Armor'][side]
@@ -33,43 +35,48 @@ class Fighter
     @energy             = stats['Energy'][side]
     @gold_per_10        = stats['GoldPer10'][side]
     @time_dead          = stats['TimeDead'][side]
+    @side               = side
     @champion_id        = id
     @stuned             = false
-    @time_left_to_basic_attack = 0
+    @invulnerable       = false
+    @level              = level
+    @stats              = stats
+    @count_of_hits      = 0
+    @count_of_made_hits = 0
+    @time_left_to_ba    = 0
+    @active_effects     = []
   end
 
   def damage(armor)
     @_damage ||= damage_multiplier(armor) * @attack_damage
   end
 
+  def count_number_of_hits
+    @count_of_hits = attack_speed + @time_left_to_ba
+    @time_left_to_ba = @count_of_hits - @count_of_hits.to_i
+    @count_of_hits = @count_of_hits.to_i
+  end
+
+  def increase_made_hits
+    @count_of_made_hits += @count_of_hits
+  end
+
   def attack_speed
-    if passive_ability_executor.passive? && increased_stats[:attack_speed]
-      increased_stats[:attack_speed]
-    else
-      @attack_speed
-    end
+    @attack_speed
   end
 
   def dead?
     @health <= 0
   end
 
-  def passive_ability
-    passive_ability_executor
+  def name
+    @_name ||= champion.data['key'].downcase.capitalize
   end
 
   private
 
-  def champion_name
-    @_champion_name ||= Champion.find(@champion_id).data['key']
-  end
-
-  def passive_ability_executor
-    @_passive_ability_executor ||= "Ability::#{champion_name}::Passive".constantize.new(self, 1)
-  end
-
-  def increased_stats
-    passive_ability_executor.increase_stats
+  def champion
+    @_champion ||= Champion.find(@champion_id)
   end
 
   def damage_multiplier(armor)
