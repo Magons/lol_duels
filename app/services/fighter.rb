@@ -1,9 +1,12 @@
 class Fighter
-  attr_reader :attack_speed, :armor, :attack_damage, :magic_resist,
-              :health_regen, :mana, :damage
-  attr_accessor :time_left_to_basic_attack, :time_dead, :health
+  attr_reader   :armor, :magic_resist,
+                :health_regen, :mana, :damage, :level, :side,
+                :base_attack_speed, :count_of_made_hits, :stats
+  attr_accessor :time_left_to_ba, :time_dead, :health, :count_of_hits, :energy,
+                :attack_speed, :attack_damage
 
-  def initialize(stats, side)
+  def initialize(stats, side, id, level)
+    @base_attack_speed  = stats['BasicAttackSpeed'][side]
     @attack_speed       = stats['AttackSpeed'][side]
     @armor              = stats['Armor'][side]
     @attack_damage      = stats['PhysicalDamage'][side]
@@ -32,18 +35,49 @@ class Fighter
     @energy             = stats['Energy'][side]
     @gold_per_10        = stats['GoldPer10'][side]
     @time_dead          = stats['TimeDead'][side]
-    @time_left_to_basic_attack = 0
+    @side               = side
+    @champion_id        = id
+    @stuned             = false
+    @invulnerable       = false
+    @level              = level
+    @stats              = stats
+    @count_of_hits      = 0
+    @count_of_made_hits = 0
+    @time_left_to_ba    = 0
+    @active_effects     = []
   end
 
   def damage(armor)
     @_damage ||= damage_multiplier(armor) * @attack_damage
   end
 
+  def count_number_of_hits
+    @count_of_hits = attack_speed + @time_left_to_ba
+    @time_left_to_ba = @count_of_hits - @count_of_hits.to_i
+    @count_of_hits = @count_of_hits.to_i
+  end
+
+  def increase_made_hits
+    @count_of_made_hits += @count_of_hits
+  end
+
+  def attack_speed
+    @attack_speed
+  end
+
   def dead?
     @health <= 0
   end
 
+  def name
+    @_name ||= champion.data['key'].downcase.capitalize
+  end
+
   private
+
+  def champion
+    @_champion ||= Champion.find(@champion_id)
+  end
 
   def damage_multiplier(armor)
     @_damage_multiplier ||= if armor >= 0
@@ -52,5 +86,4 @@ class Fighter
                               2 - (100.0 / (100.0 - armor))
                             end
   end
-
 end
