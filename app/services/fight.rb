@@ -12,8 +12,6 @@ class Fight
       @batman.count_number_of_hits
       @superman.count_number_of_hits
 
-      perform_ability
-
       superman_damage = get_damage(@superman, @batman.armor)
       batman_damage = get_damage(@batman, @superman.armor)
 
@@ -29,14 +27,16 @@ class Fight
 
       @superman.time_dead = seconds if @superman.dead? && @superman.time_dead == 0
 
-      #because hp regeneration is every 5 second we make flag
-      if seconds % 5 == 0
-        make_hp_regeneration
-      end
+      #because hp regeneration is every 5 second we make flag, it's not correct
+      # if seconds % 5 == 0
+      #   make_hp_regeneration
+      # end
 
       @batman.increase_made_hits
       @superman.increase_made_hits
       seconds += 1
+
+      perform_ability
     end
     results
   end
@@ -53,13 +53,13 @@ class Fight
 
   # for future method must contain description of hero and enemy
   def make_damage(hero, damage)
-    hero.health -= damage
+    hero.hp_pool -= damage
   end
 
   # HP Regeneration determines the amount of health regenerates over a 5-second period
   def make_hp_regeneration
-    @superman.health += @superman.health_regen
-    @batman.health += @batman.health_regen
+    @superman.hp_pool += @superman.hp_regen
+    @batman.hp_pool += @batman.hp_regen
   end
 
   def use_passive_ability(hero)

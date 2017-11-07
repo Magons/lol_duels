@@ -1,54 +1,21 @@
 class Fighter
-  attr_reader   :armor, :magic_resist,
-                :health_regen, :mana, :damage, :level, :side,
-                :base_attack_speed, :count_of_made_hits, :stats
-  attr_accessor :time_left_to_ba, :time_dead, :health, :count_of_hits, :energy,
-                :attack_speed, :attack_damage
+  attr_reader   :level, :count_of_made_hits, :stats
+  attr_accessor :time_left_to_ba, :count_of_hits
 
   def initialize(stats, side, id, level)
-    @base_attack_speed  = stats['BasicAttackSpeed'][side]
-    @attack_speed       = stats['AttackSpeed'][side]
-    @armor              = stats['Armor'][side]
-    @attack_damage      = stats['PhysicalDamage'][side]
-    @base_attack_damage = stats['BasePhysicalDamage'][side]
-    @health             = stats['HPPool'][side]
-    @magic_resist       = stats['SpellBlock'][side]
-    @health_regen       = stats['HPRegen'][side]
-    @armor_penetration  = stats['ArmorPenetration'][side]
-    @life_steal         = stats['LifeSteal'][side]
-    @attack_range       = stats['AttackRange'][side]
-    @mp_regeneration    = stats['MPRegeneration'][side]
-    @magic_penetration  = stats['MagicPenetration'][side]
-    @tenacity           = stats['Tenacity'][side]
-    @crit_chance        = stats['CritChance'][side]
-    @magic_damage       = stats['MagicDamage'][side]
-    @cooldown           = stats['Cooldown'][side]
-    @movement_speed     = stats['MovementSpeed'][side]
-    @crit_damage        = stats['CritDamage'][side]
-    @hp                 = stats['HP'][side]
-    @magic_resistance   = stats['magicResistance'][side]
-    @mp                 = stats['MP'][side]
-    @energy_regen       = stats['EnergyRegen'][side]
-    @energy_pool        = stats['EnergyPool'][side]
-    @dodge              = stats['Dodge'][side]
-    @block              = stats['Block'][side]
-    @energy             = stats['Energy'][side]
-    @gold_per_10        = stats['GoldPer10'][side]
-    @time_dead          = stats['TimeDead'][side]
-    @side               = side
     @champion_id        = id
     @stuned             = false
     @invulnerable       = false
     @level              = level
-    @stats              = stats
+    @stats              = Stats.new(stats, side)
     @count_of_hits      = 0
     @count_of_made_hits = 0
-    @time_left_to_ba    = 0
-    @active_effects     = []
+    @time_left_to_ba    = 0 #time left ot basic attak
+    @buffs              = []
   end
 
   def damage(armor)
-    @_damage ||= damage_multiplier(armor) * @attack_damage
+    damage_multiplier(armor) * physical_damage
   end
 
   def count_number_of_hits
@@ -61,16 +28,28 @@ class Fighter
     @count_of_made_hits += @count_of_hits
   end
 
-  def attack_speed
-    @attack_speed
-  end
-
   def dead?
-    @health <= 0
+    hp_pool <= 0
   end
 
   def name
     @_name ||= champion.data['key'].downcase.capitalize
+  end
+
+  def add_buff(buff)
+    @buffs << buff
+  end
+
+  def remove_buff(name)
+    @buffs.map { |buff| buff if buff.name != name }
+  end
+
+  def method_missing(method_sym, *arguments, &block)
+    if @stats.respond_to?(method_sym)
+      @stats.send(method_sym, *arguments)
+    else
+      super
+    end
   end
 
   private
@@ -80,6 +59,7 @@ class Fighter
   end
 
   def damage_multiplier(armor)
+    # check cash
     @_damage_multiplier ||= if armor >= 0
                               100.0 / (100.0 + armor)
                             else
