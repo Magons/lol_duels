@@ -11,7 +11,7 @@ module Ability
           @fighter.add_buff(
             Buff.new('hellbent', {
               attack_speed: attack_speed_increase_by_passive,
-              physical_damage: 0.25
+              physical_damage: "25%"
             })
           )
         else
@@ -35,13 +35,13 @@ module Ability
 
       def attack_speed_increase_by_passive
         if @level < 6
-          0.3
+          "30%"
         elsif @level < 11
-          0.4
+          "40%"
         elsif @level < 16
-          0.5
+          "40%"
         elsif @level >= 16
-          0.6
+          "60%"
         end
       end
     end

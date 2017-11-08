@@ -43,13 +43,33 @@ class Stats
     end
   end
 
-  LIST_OF_STATS.each do |key, value|
-    define_method :"#{key}" do
+  LIST_OF_STATS.each do |key, name|
+    define_method :"#{key}" do |value = nil|
+      return send("buff_#{key}", value) if value.present?
       instance_variable_get("@#{key}")
     end
 
     define_method("#{key}=") do |val|
       instance_variable_set("@#{key}", val)
     end
+  end
+
+  private
+
+  def parce_value(value)
+    if value.match('%') # if this percent value
+      value.match(/\d+/)[0].to_f / 100
+    else
+      value
+    end
+  end
+
+  def buff_attack_speed(value)
+    @basic_attack_speed + (@basic_attack_speed * (parce_value(value) + @additional_attack_speed))
+  end
+
+  def buff_physical_damage(value)
+    additional_attack_damage = @physical_damage - @base_physical_damage
+    @base_physical_damage * parce_value(value) + additional_attack_damage
   end
 end

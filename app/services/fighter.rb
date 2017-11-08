@@ -46,6 +46,7 @@ class Fighter
 
   def method_missing(method_sym, *arguments, &block)
     if @stats.respond_to?(method_sym)
+      # need collections for buffs
       @stats.send(method_sym, *arguments)
     else
       super
