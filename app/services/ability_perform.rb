@@ -18,6 +18,6 @@ class AbilityPerform
   end
 
   def passive_ability_executor(fighter, enemy)
-    @_passive_ability_executor ||= "Ability::#{fighter.name}::Passive".constantize.new(fighter, enemy)
+    "Ability::#{fighter.name}::Passive".constantize.new(fighter, enemy)
   end
 end

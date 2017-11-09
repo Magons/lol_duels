@@ -5,4 +5,8 @@ class Buff
     @name = name
     @effects = effects
   end
+
+  def value(stat_name)
+    @effects[stat_name]
+  end
 end

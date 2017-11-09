@@ -5,6 +5,7 @@ class Fighter
   def initialize(stats, side, id, level)
     @champion_id        = id
     @stuned             = false
+    @side               = side
     @invulnerable       = false
     @level              = level
     @stats              = Stats.new(stats, side)
@@ -40,14 +41,26 @@ class Fighter
     @buffs << buff
   end
 
+  def has_buff?(name)
+    @buffs.map(&:name).include?(name)
+  end
+
   def remove_buff(name)
     @buffs.map { |buff| buff if buff.name != name }
   end
 
   def method_missing(method_sym, *arguments, &block)
     if @stats.respond_to?(method_sym)
-      # need collections for buffs
-      @stats.send(method_sym, *arguments)
+      if method_sym.to_s.include?('=')
+        @stats.send(method_sym, *arguments)
+      else
+        puts "Buffs count - #{@side}: #{@buffs.count}"
+        @buffs.each do |buff|
+          arguments << { method_sym => buff.value(method_sym) } if buff.value(method_sym)
+        end
+        puts "#{method_sym} - #{@side}: #{@stats.send(method_sym, *arguments)} arg: #{arguments}"
+        @stats.send(method_sym, *arguments)
+      end
     else
       super
     end
@@ -60,11 +73,18 @@ class Fighter
   end
 
   def damage_multiplier(armor)
-    # check cash
-    @_damage_multiplier ||= if armor >= 0
-                              100.0 / (100.0 + armor)
-                            else
-                              2 - (100.0 / (100.0 - armor))
-                            end
+    if armor >= 0
+      100.0 / (100.0 + armor)
+    else
+      2 - (100.0 / (100.0 - armor))
+    end
+  end
+
+  def parce_value(value)
+    if value.match('%') # if this percent value
+      value.match(/\d+/)[0].to_f / 100
+    else
+      value
+    end
   end
 end

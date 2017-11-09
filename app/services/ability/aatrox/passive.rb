@@ -7,7 +7,7 @@ module Ability
         if @fighter.count_of_made_hits % 3 == 0 && @fighter.energy < 100
           @fighter.energy += 20
         end
-        if @fighter.energy == 100
+        if @fighter.energy == 100 && !@fighter.has_buff?('hellbent')
           @fighter.add_buff(
             Buff.new('hellbent', {
               attack_speed: attack_speed_increase_by_passive,

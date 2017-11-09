@@ -44,8 +44,11 @@ class Stats
   end
 
   LIST_OF_STATS.each do |key, name|
-    define_method :"#{key}" do |value = nil|
-      return send("buff_#{key}", value) if value.present?
+    define_method :"#{key}" do |*values|
+      if values.present? && values.map(&:keys).flatten.include?(key)
+        val = sum_buff_effects(values, key)
+        return send("buff_#{key}", val)
+      end
       instance_variable_get("@#{key}")
     end
 
@@ -56,20 +59,25 @@ class Stats
 
   private
 
-  def parce_value(value)
-    if value.match('%') # if this percent value
-      value.match(/\d+/)[0].to_f / 100
-    else
-      value
+  def sum_buff_effects(values, key)
+    percent = 0
+    quantitative = 0
+    values.each do |value|
+      if value[key].to_s.include?('%')
+        percent += value[key].to_f / 100
+      else
+        quantitative += value[key].to_f
+      end
     end
+    { percent: percent, quantitative: quantitative }
   end
 
-  def buff_attack_speed(value)
-    @basic_attack_speed + (@basic_attack_speed * (parce_value(value) + @additional_attack_speed))
+  def buff_attack_speed(values)
+    @basic_attack_speed + (@basic_attack_speed * (values[:percent] + @additional_attack_speed))
   end
 
-  def buff_physical_damage(value)
+  def buff_physical_damage(values)
     additional_attack_damage = @physical_damage - @base_physical_damage
-    @base_physical_damage * parce_value(value) + additional_attack_damage
+    @base_physical_damage * values[:percent] + additional_attack_damage + @base_physical_damage
   end
 end
