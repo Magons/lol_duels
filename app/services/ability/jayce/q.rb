@@ -1,6 +1,6 @@
 module Ability
   module Jayce
-    class Q < Ability::Passive
+    class Q < Ability::Base
 
     end
   end

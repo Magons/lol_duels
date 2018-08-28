@@ -6,6 +6,7 @@ namespace :load_data do
     puts 'Load items...'
     url = 'https://ru.api.riotgames.com/lol/static-data/v3/items?tags=all'
     response = load_data(url, args)
+    binding.pry
     JSON.parse(response.body)['data'].each do |item|
       Item.create(name: item.first, data: item.last)
     end
@@ -15,7 +16,7 @@ namespace :load_data do
   task :runes, [:api_key, :locale] => :environment do |t, args|
     Rune.destroy_all
 
-    api_key = args[:api_key] || 'RGAPI-517e5bf5-a0e2-4403-b931-1c5ce5afd6d5'
+    api_key = args[:api_key] || 'RGAPI-f3b967db-fe73-4886-9bdf-bb476ff6dbaf'
     locale = args[:locale] || 'en_US'
 
     puts 'Load runes...'
@@ -34,7 +35,7 @@ namespace :load_data do
   task :masteries, [:api_key, :locale] => :environment do |t, args|
     Mastery.destroy_all
 
-    api_key = args[:api_key] || 'RGAPI-517e5bf5-a0e2-4403-b931-1c5ce5afd6d5'
+    api_key = args[:api_key] || 'RGAPI-f3b967db-fe73-4886-9bdf-bb476ff6dbaf'
     locale = args[:locale] || 'en_US'
 
     puts 'Load masteries...'
@@ -68,14 +69,14 @@ namespace :load_data do
 end
 
 def load_data(url, args)
-  api_key = args[:api_key] || 'RGAPI-517e5bf5-a0e2-4403-b931-1c5ce5afd6d5'
+  api_key = args[:api_key] || 'RGAPI-f3b967db-fe73-4886-9bdf-bb476ff6dbaf'
   locale = args[:locale] || 'en_US'
 
   uri = URI.parse(url + "&locale=#{locale}&api_key=#{api_key}")
   response = Net::HTTP.get_response(uri)
   if response.message == 'Forbidden' || response.message == 'Unauthorized'
     puts "Response #{response.message} \n"
-    puts "Please pass api_tokenn to task - 'rake load_data:all[api_token]'"
+    puts "Please pass api_token to task - 'rake load_data:all[api_token]'"
   end
   response
 end

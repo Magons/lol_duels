@@ -1,6 +1,6 @@
 module Ability
   module Draven
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

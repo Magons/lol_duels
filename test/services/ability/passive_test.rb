@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AbilitySendEmailTest < ActiveSupport::TestCase
   def subject(champion_id, fighter)
-    Ability::Passive.new(champion_id, fighter)
+    Ability::Base.new(champion_id, fighter)
   end
 
   def champion_id

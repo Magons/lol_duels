@@ -1,6 +1,6 @@
 module Ability
   module Talon
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

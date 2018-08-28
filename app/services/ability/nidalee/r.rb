@@ -1,6 +1,6 @@
 module Ability
   module Nidalee
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

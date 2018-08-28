@@ -1,6 +1,6 @@
 module Ability
   module Morgana
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

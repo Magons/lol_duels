@@ -1,6 +1,6 @@
 module Ability
   module Braum
-    class Passive < Ability::Passive
+    class Passive < Ability::Base
       def permanent?
         false
       end

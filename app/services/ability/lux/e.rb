@@ -1,6 +1,6 @@
 module Ability
   module Lux
-    class E < Ability::Passive
+    class E < Ability::Base
 
     end
   end

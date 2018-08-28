@@ -1,6 +1,6 @@
 module Ability
   module Leona
-    class Q < Ability::Passive
+    class Q < Ability::Base
 
     end
   end

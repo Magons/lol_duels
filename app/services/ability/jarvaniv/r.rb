@@ -1,6 +1,6 @@
 module Ability
   module Jarvaniv
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

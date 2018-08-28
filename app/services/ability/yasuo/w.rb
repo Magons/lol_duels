@@ -1,6 +1,6 @@
 module Ability
   module Yasuo
-    class W < Ability::Passive
+    class W < Ability::Base
 
     end
   end

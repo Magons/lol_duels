@@ -1,6 +1,6 @@
 module Ability
   module Ivern
-    class E < Ability::Passive
+    class E < Ability::Base
 
     end
   end

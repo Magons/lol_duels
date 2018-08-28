@@ -70,11 +70,13 @@ class Fight
     {
       left: {
         time: @superman.time_dead,
-        percent: percent_to_win(@superman)
+        percent: percent_to_win(@superman),
+        details: {}
       },
       right: {
         time: @batman.time_dead,
-        percent: percent_to_win(@batman)
+        percent: percent_to_win(@batman),
+        details: {}
       }
     }
   end

@@ -1,6 +1,6 @@
 module Ability
   module Drmundo
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

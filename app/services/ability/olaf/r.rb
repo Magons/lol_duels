@@ -1,6 +1,6 @@
 module Ability
   module Olaf
-    class R < Ability::Passive
+    class R < Ability::Base
 
     end
   end

@@ -1,6 +1,6 @@
 module Ability
   module Akali
-    class E < Ability::Passive
+    class E < Ability::Base
 
     end
   end

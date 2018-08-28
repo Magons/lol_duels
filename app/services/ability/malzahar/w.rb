@@ -1,6 +1,6 @@
 module Ability
   module Malzahar
-    class W < Ability::Passive
+    class W < Ability::Base
 
     end
   end

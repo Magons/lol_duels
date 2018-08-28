@@ -1,6 +1,6 @@
 module Ability
   module Khazix
-    class E < Ability::Passive
+    class E < Ability::Base
 
     end
   end

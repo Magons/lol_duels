@@ -1,6 +1,6 @@
 module Ability
   module Kindred
-    class Passive < Ability::Passive
+    class Passive < Ability::Base
       def permanent?
         false
       end

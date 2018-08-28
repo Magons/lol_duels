@@ -1,6 +1,6 @@
 module Ability
   module Jax
-    class Q < Ability::Passive
+    class Q < Ability::Base
 
     end
   end

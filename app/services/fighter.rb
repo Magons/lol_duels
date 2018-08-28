@@ -1,6 +1,6 @@
 class Fighter
   attr_reader   :level, :count_of_made_hits, :stats
-  attr_accessor :time_left_to_ba, :count_of_hits
+  attr_accessor :time_left_to_ba, :count_of_hits, :abilities
 
   def initialize(stats, side, id, level)
     @champion_id        = id
@@ -13,6 +13,7 @@ class Fighter
     @count_of_made_hits = 0
     @time_left_to_ba    = 0 #time left ot basic attak
     @buffs              = []
+    @abilities          = []
   end
 
   def damage(armor)
@@ -49,16 +50,20 @@ class Fighter
     @buffs.map { |buff| buff if buff.name != name }
   end
 
+  def has_ability?(name)
+    
+  end
+
   def method_missing(method_sym, *arguments, &block)
     if @stats.respond_to?(method_sym)
       if method_sym.to_s.include?('=')
         @stats.send(method_sym, *arguments)
       else
-        puts "Buffs count - #{@side}: #{@buffs.count}"
+        # puts "Buffs count - #{@side}: #{@buffs.count}"
         @buffs.each do |buff|
           arguments << { method_sym => buff.value(method_sym) } if buff.value(method_sym)
         end
-        puts "#{method_sym} - #{@side}: #{@stats.send(method_sym, *arguments)} arg: #{arguments}"
+        # puts "#{method_sym} - #{@side}: #{@stats.send(method_sym, *arguments)} arg: #{arguments}"
         @stats.send(method_sym, *arguments)
       end
     else

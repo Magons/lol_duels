@@ -1,6 +1,6 @@
 module Ability
   module Quinn
-    class E < Ability::Passive
+    class E < Ability::Base
 
     end
   end

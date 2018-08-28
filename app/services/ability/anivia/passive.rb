@@ -1,6 +1,6 @@
 module Ability
   module Anivia
-    class Passive < Ability::Passive
+    class Passive < Ability::Base
       def permanent?
         false
       end

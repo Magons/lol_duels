@@ -1,6 +1,6 @@
 module Ability
   module Nocturne
-    class W < Ability::Passive
+    class W < Ability::Base
 
     end
   end
